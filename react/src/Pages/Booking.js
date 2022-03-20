@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import StepOne from "../Forms/StepOne";
 import StepTwo from "../Forms/StepTwo";
 import Final from "../Forms/Final";
+import Total from "../Forms/Total";
 import Breadcrumbs from "../Components/Breadcrumbs";
 
 function Booking() {
@@ -14,7 +15,9 @@ function Booking() {
       firstName: "",
       lastName: "",
       age: "",
-      email: ""
+      email: "",
+      subtotal: 123.45,
+      total: 234.56
     })
   
     // function for going to next step by increasing step state by 1
@@ -56,6 +59,9 @@ function Booking() {
                 <Col className="custom-margin">
                   <StepOne nextStep={nextStep} handleFormData={handleInputData} values={formData} />
                 </Col>
+                <Col className="custom-margin">
+                  <Total values={formData} />
+                </Col>
               </Row>
             </Container>
           </div>
@@ -74,6 +80,9 @@ function Booking() {
                 <Col className="custom-margin">
                   <StepTwo nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
                 </Col>
+                <Col className="custom-margin">
+                  <Total values={formData} />
+                </Col>
               </Row>
             </Container>
           </div>
@@ -91,6 +100,9 @@ function Booking() {
               <Row>
                 <Col className="custom-margin">
                   <Final values={formData} />
+                </Col>
+                <Col className="custom-margin">
+                  <Total values={formData} />
                 </Col>
               </Row>
             </Container>

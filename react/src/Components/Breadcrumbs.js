@@ -11,13 +11,15 @@ const Breadcrumbs = ({ values }) => {
   };
 
   return (
-    <div className="breadcrumbs">
+    <div className="mt-5">
       <Card.Header>Booking</Card.Header>
       <Card>
         <Card.Body>
-          <Button variant={btnVariant(values, 1)} className="breadcrumb-btn">Room Options</Button>
-          <Button variant={btnVariant(values, 2)} className="breadcrumb-btn">Make Payment</Button>
-          <Button variant={btnVariant(values, 3)} className="breadcrumb-btn">Confirm Booking</Button>
+          <Button variant={btnVariant(values, 1)} className="mx-5">Room Options</Button>
+          &gt;
+          <Button variant={btnVariant(values, 2)} className="mx-5">Make Payment</Button>
+          &gt;
+          <Button variant={btnVariant(values, 3)} className="mx-5">Confirmation</Button>
         </Card.Body>
       </Card>
     </div>

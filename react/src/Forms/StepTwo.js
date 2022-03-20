@@ -20,7 +20,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   };
   return (
     <>
-      <Card className="steps">
+      <Card className="mt-3">
         <Card.Body>
           <Form onSubmit={submitFormData}>
             <Form.Group className="mb-3">

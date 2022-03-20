@@ -24,7 +24,7 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
   };
 
   return (
-    <div className="steps">
+    <div className="mt-3">
       <Card>
         <Card.Body>
           <Form onSubmit={submitFormData}>
