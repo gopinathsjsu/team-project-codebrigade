@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import StepOne from "../Forms/StepOne";
-import StepTwo from "../Forms/StepTwo";
-import Final from "../Forms/Final";
-import Total from "../Forms/Total";
+import StepOne from "../Components/StepOne";
+import StepTwo from "../Components/StepTwo";
+import Final from "../Components/Final";
+import Total from "../Components/Total";
 import Breadcrumbs from "../Components/Breadcrumbs";
 
 function Booking() {
