@@ -11,15 +11,28 @@ import Hotels from "./Pages/Hotels";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route exact path='/booking' element={<Booking />} />
-          <Route exact path='/hotels' element={<Hotels />} />
-          <Route exact path='/' element={<Home />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Header/>
+      <Router>
+        <div>
+          <Routes>
+            <Route exact path='/booking' element={<Booking />} />
+            <Route exact path='/hotels' element={<Hotels />} />
+            <Route exact path='/' element={<Home />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="App-header">
+      <div>Sign In or Join</div>
+      <div>My Trips</div>
+      <div></div>
+    </header>
   );
 }
 

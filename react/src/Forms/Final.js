@@ -7,7 +7,7 @@ const Final = ({ values }) => {
   const { firstName, lastName, phoneNumber, creditCard, cvc } = values;
   return (
     <>
-      <Card style={{ marginTop: 100, textAlign: "left" }}>
+      <Card className="steps">
         <Card.Body>
           <p>
             <strong>First Name :</strong> {firstName}{" "}

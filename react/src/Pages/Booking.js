@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import StepOne from "../Forms/StepOne";
 import StepTwo from "../Forms/StepTwo";
 import Final from "../Forms/Final";
+import Breadcrumbs from "../Components/Breadcrumbs";
 
 function Booking() {
     //state for steps
@@ -47,7 +48,12 @@ function Booking() {
           <div className="App">
             <Container>
               <Row>
-                <Col md={{ span: 6, offset: 3 }} className="custom-margin">
+                <Col className="custom-margin">
+                  <Breadcrumbs values={step}/>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="custom-margin">
                   <StepOne nextStep={nextStep} handleFormData={handleInputData} values={formData} />
                 </Col>
               </Row>
@@ -60,7 +66,12 @@ function Booking() {
           <div className="App">
             <Container>
               <Row>
-                <Col md={{ span: 6, offset: 3 }} className="custom-margin">
+                <Col className="custom-margin">
+                  <Breadcrumbs values={step}/>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="custom-margin">
                   <StepTwo nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
                 </Col>
               </Row>
@@ -73,7 +84,12 @@ function Booking() {
           <div className="App">
             <Container>
               <Row>
-                <Col md={{ span: 6, offset: 3 }} className="custom-margin">
+                <Col className="custom-margin">
+                  <Breadcrumbs values={step}/>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="custom-margin">
                   <Final values={formData} />
                 </Col>
               </Row>
