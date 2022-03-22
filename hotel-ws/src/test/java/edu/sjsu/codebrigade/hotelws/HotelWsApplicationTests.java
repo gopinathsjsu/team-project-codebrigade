@@ -1,5 +1,6 @@
 package edu.sjsu.codebrigade.hotelws;
 
+import edu.sjsu.codebrigade.hotelws.restservice.BookingController;
 import edu.sjsu.codebrigade.hotelws.restservice.Hotel;
 import edu.sjsu.codebrigade.hotelws.restservice.HotelController;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,9 @@ class HotelWsApplicationTests {
 
 	@Autowired
 	private HotelController hotelController;
+
+	@Autowired
+	private BookingController bookingController;
 
 	@Test
 	void simpleTest() {
