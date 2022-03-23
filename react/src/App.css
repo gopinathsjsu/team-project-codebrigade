@@ -1,8 +1,9 @@
-.App {
-  margin: 5px auto;
-  width: 90%;
-  min-height: 100vh;
-  background-color: #E3E3E3;
+html, .App {
+  background: url( ./Assets/Summer-holiday.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .App-header {

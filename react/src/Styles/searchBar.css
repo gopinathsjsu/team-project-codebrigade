@@ -1,0 +1,18 @@
+.contents {
+    background-color: #EDEDED;
+    border: transparent;
+    border-radius: 20px;
+    display: flex;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.searchAttribute {
+    margin: 25px;
+}
+
+.searchDropdown {
+    position: relative;
+    top: 47%;
+    margin: auto 25px;
+}

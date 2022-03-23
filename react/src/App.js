@@ -3,11 +3,11 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Booking from "./Pages/Booking";
 import Hotels from "./Pages/Hotels";
+import Home from "./Pages/Home";
 
 function App() {
   return (
@@ -33,15 +33,6 @@ function Header() {
       <div>My Trips</div>
       <div></div>
     </header>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home/search screen can go here</h2>
-      (this is a temporary link to <Link to="/booking">booking wizard</Link>)
-    </div>
   );
 }
 
