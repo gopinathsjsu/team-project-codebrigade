@@ -51,16 +51,8 @@ function Booking() {
           <div className="App">
             <Container>
               <Row>
-                <Col className="custom-margin">
-                  <Breadcrumbs values={step}/>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="custom-margin">
+                <Col>
                   <StepOne nextStep={nextStep} handleFormData={handleInputData} values={formData} />
-                </Col>
-                <Col className="custom-margin">
-                  <Total values={formData} />
                 </Col>
               </Row>
             </Container>
@@ -72,16 +64,8 @@ function Booking() {
           <div className="App">
             <Container>
               <Row>
-                <Col className="custom-margin">
-                  <Breadcrumbs values={step}/>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="custom-margin">
+                <Col>
                   <StepTwo nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
-                </Col>
-                <Col className="custom-margin">
-                  <Total values={formData} />
                 </Col>
               </Row>
             </Container>
@@ -93,15 +77,15 @@ function Booking() {
           <div className="App">
             <Container>
               <Row>
-                <Col className="custom-margin">
+                <Col>
                   <Breadcrumbs values={step}/>
                 </Col>
               </Row>
               <Row>
-                <Col className="custom-margin">
+                <Col>
                   <Final values={formData} />
                 </Col>
-                <Col className="custom-margin">
+                <Col>
                   <Total values={formData} />
                 </Col>
               </Row>
