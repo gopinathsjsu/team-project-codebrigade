@@ -1,24 +1,9 @@
-import React, { useState } from "react";
-import { Form, Card, Button, Image, Accordion } from "react-bootstrap";
-import { Container, Row, Col } from "react-bootstrap";
-import validator from "validator";
+import React from "react";
+import { Form, Card, Button, Image, Accordion, Container, Row, Col } from "react-bootstrap";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
-  //creating error state for validation
-  const [error, setError] = useState(false);
 
-  // after form submit validating the form data using validator
-  const submitFormData = (e) => {
-    e.preventDefault();
-
-    // checking if value of first name and last name is empty show error else take to next step
-    if (validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
-      setError(true);
-    } else {
-      nextStep();
-    }
-  };
   return (
     <Card className="mt-3">
       <Card.Header>Reservation Details</Card.Header>

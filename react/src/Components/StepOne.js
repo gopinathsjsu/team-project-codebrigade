@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
-import { Container, Row, Col, Image, Figure } from "react-bootstrap";
+import React from "react";
+import { Card, Button, Container, Row, Col, Figure } from "react-bootstrap";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepOne = ({ nextStep, handleFormData, values }) => {
-  //creating error state for validation
-  const [error, setError] = useState(false);
   const rooms = [
     { name: "Queen", description: "1 Queen bed, city view", content: "Complimentary room service, flexible rate. Short description. ", rate: "123.45", qty: 10 },
     { name: "King", description: "1 King bed, garden view", content: "Complimentary room service, flexible rate. Long description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", rate: "193.45", qty: 2 },
