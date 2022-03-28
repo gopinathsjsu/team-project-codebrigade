@@ -16,3 +16,32 @@
     top: 47%;
     margin: auto 25px;
 }
+
+.findButton {
+    border-radius: 28px !important;
+    margin: 56px 20px 20px 20px;
+    height: fit-content;
+}
+
+.searchDestination {
+    display: flex;
+}
+
+.fa-location-dot {
+    color: #E1B47A;
+    position: relative;
+    top: 11px;
+    right: 21px;
+}
+
+.lisItem {
+    display: flex;
+}
+
+.counter {
+    float: right;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: transparent !important;
+}
