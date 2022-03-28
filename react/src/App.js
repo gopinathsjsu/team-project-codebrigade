@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
@@ -14,13 +14,11 @@ function App() {
     <div className="App">
       <Header/>
       <Router>
-        <div>
           <Routes>
             <Route exact path='/booking' element={<Booking />} />
             <Route exact path='/hotels' element={<Hotels />} />
             <Route exact path='/' element={<Home />} />
           </Routes>
-        </div>
       </Router>
     </div>
   );

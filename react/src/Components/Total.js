@@ -14,7 +14,7 @@ const Total = ({ values }) => {
               <Form.Control
                 defaultValue={values.subtotal}
                 type="text"
-                disabled="true"
+                disabled={true}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -22,7 +22,7 @@ const Total = ({ values }) => {
               <Form.Control
                 defaultValue={values.total}
                 type="text"
-                disabled="true"
+                disabled={true}
               />
             </Form.Group>
           </Form>
