@@ -1,8 +1,8 @@
 package edu.sjsu.codebrigade.hotelws;
 
-import edu.sjsu.codebrigade.hotelws.restservice.BookingController;
-import edu.sjsu.codebrigade.hotelws.restservice.Hotel;
-import edu.sjsu.codebrigade.hotelws.restservice.HotelController;
+import edu.sjsu.codebrigade.hotelws.controller.BookingController;
+import edu.sjsu.codebrigade.hotelws.dto.Hotel;
+import edu.sjsu.codebrigade.hotelws.controller.HotelController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

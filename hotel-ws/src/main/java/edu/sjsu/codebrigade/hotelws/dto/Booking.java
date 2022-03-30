@@ -1,4 +1,4 @@
-package edu.sjsu.codebrigade.hotelws.restservice;
+package edu.sjsu.codebrigade.hotelws.dto;
 
 public class Booking {
 
@@ -20,7 +20,7 @@ public class Booking {
         return id;
     }
 
-    void setId(long id) {this.id = id;}
+    public void setId(long id) {this.id = id;}
 
     public String getFirstName() {
         return firstName;

@@ -13,14 +13,14 @@ public class City {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "countryId")
+    @Column(name = "country_id")
     private int countryId;
 
 
-    @Column(name = "cityId")
+    @Column(name = "city_id")
     private int cityId;
 
-    @Column(name = "postalCode")
+    @Column(name = "postal_code")
     private int postalCode;
 
 

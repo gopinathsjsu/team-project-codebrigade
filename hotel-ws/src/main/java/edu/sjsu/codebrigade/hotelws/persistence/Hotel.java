@@ -13,10 +13,10 @@ public class Hotel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "companyId")
+    @Column(name = "company_id")
     private int companyId;
 
-    @Column(name = "cityId")
+    @Column(name = "city_id")
     private int cityId;
 
     @Column(name = "desc")
