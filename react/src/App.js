@@ -1,26 +1,24 @@
 import "./App.css";
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Booking from "./Pages/Booking";
 import Hotels from "./Pages/Hotels";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <div className="App">
       <Header/>
       <Router>
-        <div>
           <Routes>
             <Route exact path='/booking' element={<Booking />} />
             <Route exact path='/hotels' element={<Hotels />} />
             <Route exact path='/' element={<Home />} />
           </Routes>
-        </div>
       </Router>
     </div>
   );
@@ -33,15 +31,6 @@ function Header() {
       <div>My Trips</div>
       <div></div>
     </header>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home/search screen can go here</h2>
-      (this is a temporary link to <Link to="/booking">booking wizard</Link>)
-    </div>
   );
 }
 

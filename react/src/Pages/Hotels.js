@@ -1,7 +1,7 @@
 import React from "react";
 
 function Hotels() {
-  return <h2>Hotel management page (for admin maybe?)</h2>;
+  return <>Hotel management page (for admin maybe?)</>;
 }
 
 export default Hotels;
