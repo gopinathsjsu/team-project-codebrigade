@@ -4,6 +4,8 @@ html, .App {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+  /* added a temporary font, TODO: need to finalise a font for the entire app */
 }
 
 .btn-primary {
