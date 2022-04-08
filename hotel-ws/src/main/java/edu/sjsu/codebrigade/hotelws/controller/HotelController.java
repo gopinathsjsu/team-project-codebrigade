@@ -1,9 +1,10 @@
 package edu.sjsu.codebrigade.hotelws.controller;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import edu.sjsu.codebrigade.hotelws.dto.Hotel;
+import edu.sjsu.codebrigade.hotelws.persistence.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +19,21 @@ import edu.sjsu.codebrigade.hotelws.service.HotelService;
 @RestController
 public class HotelController {
 
-    private final AtomicLong counter = new AtomicLong();
+    private final AtomicInteger counter = new AtomicInteger();
 
     @Autowired
     private HotelService hotelService;
 
     @GetMapping("/hotel")
-    public Hotel get(@RequestParam(value = "name", defaultValue = "Marriott") String name) {
-        return new Hotel(counter.incrementAndGet(), name);
+    public String get(@RequestParam(value = "name", defaultValue = "Marriott") String name) {
+        //return new Hotel(counter.incrementAndGet(), name);
+        return "success";
     }
 
-    @GetMapping("/hotel/{cityId}")
-    public ResponseEntity<List<Hotel>> getHotels(@PathVariable int cityId) {
+    @GetMapping("/hotel/{cityName}")
+    public ResponseEntity<List<Hotel>> getHotels(@PathVariable String cityName) {
         return (ResponseEntity<List<Hotel>>) ResponseEntity.ok()
                 .header("Custom-Header", "<header>")
-                .body(hotelService.getHotelsByCity(cityId));
+                .body(hotelService.getHotelsByCity(cityName));
     }
 }
