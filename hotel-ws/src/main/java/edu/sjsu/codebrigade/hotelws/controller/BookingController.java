@@ -32,4 +32,5 @@ public class BookingController {
         return newBooking;
     }
 
+
 }

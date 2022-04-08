@@ -12,8 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 
-    @Query(value = "SELECT *"
-            + "FROM hotel h where h.city_id = :cityId", nativeQuery = true)
-    List<Hotel> fetchHotelsByCity(@Param("cityId")int cityId);
+    @Query(value = "SELECT * FROM hotel h, city c where h.city_id = c.id and c.name = :cityName", nativeQuery = true)
+    List<Hotel> fetchHotelsByCity(@Param("cityName")String cityName);
 
 }

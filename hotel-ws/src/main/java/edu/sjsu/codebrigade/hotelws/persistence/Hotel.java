@@ -1,6 +1,9 @@
 package edu.sjsu.codebrigade.hotelws.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "hotel")
@@ -21,6 +24,20 @@ public class Hotel {
 
     @Column(name = "desc")
     private String desc;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "price")
+    private int price;
+
+    @Column(name = "image")
+    private String imageUrl;
+
+    @OneToMany(mappedBy = "hotelId", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("hotelId")
+    private Set<Room> rooms;
 
     public Integer getId() {
         return id;
@@ -60,5 +77,37 @@ public class Hotel {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public String getImage() {
+        return imageUrl;
+    }
+
+    public void setImage(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
