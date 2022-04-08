@@ -13,14 +13,23 @@ public class HotelService {
     @Resource
     private HotelRepository hotelRepository;
 
-    public List<edu.sjsu.codebrigade.hotelws.dto.Hotel> getHotelsByCity(int cityId) {
-        List<edu.sjsu.codebrigade.hotelws.persistence.Hotel> list = hotelRepository.fetchHotelsByCity(cityId);
-        List<edu.sjsu.codebrigade.hotelws.dto.Hotel> resultList = new ArrayList<>();
-        for(Hotel input: list){
-            edu.sjsu.codebrigade.hotelws.dto.Hotel hotel = new edu.sjsu.codebrigade.hotelws.dto.Hotel(input.getId(), input.getName());
-            resultList.add(hotel);
-        }
+    public List<edu.sjsu.codebrigade.hotelws.persistence.Hotel> getHotelsByCity(String cityName) {
+        List<edu.sjsu.codebrigade.hotelws.persistence.Hotel> list = hotelRepository.fetchHotelsByCity(cityName);
+//        List<edu.sjsu.codebrigade.hotelws.dto.Hotel> resultList = new ArrayList<>();
+//        for(Hotel input: list){
+//            edu.sjsu.codebrigade.hotelws.dto.Hotel hotel = new edu.sjsu.codebrigade.hotelws.dto.Hotel();
+//            hotel.setId(input.getId());
+//            hotel.setName(input.getName());
+//            hotel.setCityId(input.getCityId());
+//            hotel.setCompanyId(input.getCompanyId());
+//            hotel.setDesc(input.getDesc());
+//            hotel.setAddress(input.getAddress());
+//            hotel.setPrice(input.getPrice());
+//
+//            //hotel.setRoomList(input.getRooms());
+//            resultList.add(hotel);
+//        }
 
-        return resultList;
+        return list;
     }
 }
