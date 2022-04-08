@@ -1,27 +1,39 @@
 //import { CognitoAccessToken, CognitoUserPool } from "amazon-cognito-identity-js";
 import React, { useState } from "react";
 import UserPool from "../UserPool";
+import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
-import "../Styles/SignUp.css";
+const AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 
 
 const Signup = () => {
-    const [email, setEmail] = useState("")
+    
+    const [email, setEmail]= useState("")
     const [password, setPassword] = useState("");
-    const [given_name, set_given_name] = useState("");
-    const [family_name, set_family_name] = useState("");
-    const [gender, setGender] = useState("");
-    const [birthdate, setBirthdate] = useState("");
+    const [given_name, set_given_name]=  useState("");
+    const [family_name, set_family_name] =  useState("");
+    const [gender, setGender ]=  useState("");
+    const [birthdate, setBirthdate] =  useState("");
+    let attributeList = [];
+
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(email));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(given_name));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(family_name));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(birthdate));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(gender));
+
+
 
     const onSubmit = (event) => {
         event.preventDefault();
 
-        UserPool.signUp(email, password, given_name, family_name, birthdate, gender, [], null, (err, data) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log(data)
-        });
+        UserPool.signUp(email, password, attributeList, null,(err,data)=>{
+        if (err) {
+            console.error(err);
+        }
+        console.log(data) 
+    });
+        
     };
 
     return (
