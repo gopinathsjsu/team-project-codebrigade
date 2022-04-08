@@ -86,7 +86,7 @@ const Signup = () => {
                     </div>
                     <div className="clikables">
                         <span className="hint-text">Have an account? </span>
-                        <Link className="Sign-In-link" to="/Login">SignIn</Link>
+                        <Link className="Sign-In-link" to="/login">SignIn</Link>
                         <button className="create-button" type="submit">Create account</button>
                     </div>
                 </form>

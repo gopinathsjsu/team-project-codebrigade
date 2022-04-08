@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPool from "../UserPool";
+import "../Styles/Login.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,21 +35,35 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        ></input>
-        <label htmlFor="password">Password</label>
-        <input
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        ></input>
-
-        <button type="submit">Login</button>
-      </form>
+    <div className="Contents">
+      <header className="title">Sign in to your account</header>
+      <div className="fields-container">
+        <form onSubmit={onSubmit}>
+          <div className="field-container">
+            <label htmlFor="email">Email</label>
+            <input
+              className="field"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            ></input>
+          </div>
+          <div className="field-container">
+            <label htmlFor="password">Password</label>
+            <input
+              className="field"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            ></input>
+          </div>
+          <span className="hint-text">Forgot your password? </span>
+          <Link className="alternate-link" to="/login">Reset password</Link>
+          <div>
+          <span className="hint-text">No account? </span>
+          <Link className="alternate-link" to="/signUp">Create account</Link>
+          <button className="login-button" type="submit">Sign in</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
