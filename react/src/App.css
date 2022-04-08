@@ -4,20 +4,8 @@ html, .App {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-.App-header {
-  display: flex;
-  background-color: #215C73;
-  justify-content: flex-end;
-}
-
-.App-header div {
-  margin: 1%;
-  text-align: center;
-  font-weight: bold;
-  font-family: sans-serif;
-  color: white;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+  /* added a temporary font, TODO: need to finalise a font for the entire app */
 }
 
 .btn-primary {
