@@ -1,36 +1,41 @@
 package edu.sjsu.codebrigade.hotelws.controller;
 
-import edu.sjsu.codebrigade.hotelws.dto.Booking;
+import edu.sjsu.codebrigade.hotelws.persistence.Booking;
+import edu.sjsu.codebrigade.hotelws.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.sql.Date;
+import java.util.List;
 
 @RestController
 public class BookingController {
 
-    private final AtomicLong counter = new AtomicLong();
-    private final Map<Long, Booking> bookings = new HashMap();
+    @Autowired
+    private BookingService bookingService;
 
-    @GetMapping("/booking/{id}")
-    public Booking get(@PathVariable long id) {
-        Booking b = bookings.get(id);
-        if (b == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
-        return b;
+    @GetMapping("/booking/{roomId}")
+    public ResponseEntity<List<Booking>> get(@PathVariable int roomId) {
+        List<Booking> bookings = bookingService.getBookingsByRoomId(roomId);
+        return ResponseEntity.ok().body(bookings);
+    }
+
+    @GetMapping("/booking")
+    public ResponseEntity<List<Booking>> getAllBookings() {
+        List<Booking> bookings = bookingService.getAllBookings();
+        return ResponseEntity.ok().body(bookings);
     }
 
     @PostMapping("/booking")
     @ResponseBody
-    public Booking post(@RequestBody Booking newBooking) {
-        long id = counter.incrementAndGet();
-        newBooking.setId(id);
-        bookings.put(id, newBooking);
-        return newBooking;
+    public ResponseEntity<Booking> create(@RequestBody Booking newBooking) {
+        Date checkin = newBooking.getCheckin();
+        Date checkout = newBooking.getCheckout();
+        if (checkin == null || checkout == null || checkin.after(checkout))
+            return ResponseEntity.badRequest().build();
+        Booking booking = bookingService.save(newBooking);
+        return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
-
-
 }
