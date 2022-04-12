@@ -1,10 +1,13 @@
 package edu.sjsu.codebrigade.hotelws.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name = "booking")
+@Access(AccessType.FIELD)
 public class Booking {
     @Id
     @Column(name = "id")
@@ -13,9 +16,6 @@ public class Booking {
 
     @Column(name = "room_id")
     private int roomId;
-
-    @Column(name = "options")
-    private int options;
 
     @Column(name = "checkin")
     private Date checkin;
@@ -46,6 +46,76 @@ public class Booking {
 
     @Column(name = "cvc")
     private int cvc;
+
+    public boolean isPet() {
+        return getOptionBit(1);
+    }
+
+    public void setPet(boolean pet) {
+        setOptionBit(pet, 1);
+    }
+
+    public boolean isCrib() {
+        return getOptionBit(2);
+    }
+
+    public void setCrib(boolean crib) {
+        setOptionBit(crib, 2);
+    }
+
+    public boolean isLateCheckout() {
+        return getOptionBit(3);
+    }
+
+    public void setLateCheckout(boolean lateCheckout) {
+        setOptionBit(lateCheckout, 3);
+    }
+
+    public boolean isExtraTowels() {
+        return getOptionBit(4);
+    }
+
+    public void setExtraTowels(boolean extraTowels) {
+        setOptionBit(extraTowels, 4);
+    }
+
+    @Transient // do not persist this field
+    private boolean pet;
+
+    @Transient // do not persist this field
+    private boolean crib;
+
+    @Transient // do not persist this field
+    private boolean lateCheckout;
+
+    @Transient // do not persist this field
+    private boolean extraTowels;
+
+    @Access(AccessType.PROPERTY) // persist this property instead
+    @Column(name = "options")
+    private int options;
+
+    @JsonIgnore
+    public int getOptions() {
+        return options;
+    }
+
+    @JsonIgnore
+    public void setOptions(int options) {
+        this.options = options;
+    }
+
+    private void setOptionBit(boolean v, int n) {
+        if (v)
+            this.options |= 1 << n;
+        else
+            this.options &= ~(1 << n);
+    }
+
+    private boolean getOptionBit(int n) {
+        return (this.options & 1 << n) != 0;
+    }
+
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "room_id", referencedColumnName = "id", nullable = false)
@@ -79,14 +149,6 @@ public class Booking {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public int getOptions() {
-        return options;
-    }
-
-    public void setOptions(int options) {
-        this.options = options;
     }
 
     public String getAddress() {
