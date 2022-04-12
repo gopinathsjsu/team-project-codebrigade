@@ -39,6 +39,7 @@ public class Booking {
     private String state;
 
     @Column(name = "credit_card")
+    @Convert(converter = CreditCardConverter.class)
     private String creditCard;
 
     @Column(name = "expiry")
@@ -93,19 +94,21 @@ public class Booking {
 
     @Access(AccessType.PROPERTY) // persist this property instead
     @Column(name = "options")
-    private int options;
+    private Integer options;
 
     @JsonIgnore
-    public int getOptions() {
+    public Integer getOptions() {
         return options;
     }
 
     @JsonIgnore
-    public void setOptions(int options) {
+    public void setOptions(Integer options) {
         this.options = options;
     }
 
     private void setOptionBit(boolean v, int n) {
+        if (this.options == null)
+            this.options = 0;
         if (v)
             this.options |= 1 << n;
         else
@@ -113,13 +116,13 @@ public class Booking {
     }
 
     private boolean getOptionBit(int n) {
-        return (this.options & 1 << n) != 0;
+        return this.options != null && (this.options & 1 << n) != 0;
     }
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "room_id", referencedColumnName = "id", nullable = false)
-    public int getRoomId() {
+    public Integer getRoomId() {
         return roomId;
     }
 
@@ -191,7 +194,7 @@ public class Booking {
         this.expiry = expiry;
     }
 
-    public int getCvc() {
+    public Integer getCvc() {
         return cvc;
     }
 
