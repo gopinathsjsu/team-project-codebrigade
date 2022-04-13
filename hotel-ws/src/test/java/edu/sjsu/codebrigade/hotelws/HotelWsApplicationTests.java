@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class HotelWsApplicationTests {
@@ -35,16 +34,26 @@ class HotelWsApplicationTests {
 	}
 
 	@Test
-	void simpleBookingTest() throws JsonProcessingException {
+	void nonEmptyBookingTest() throws JsonProcessingException {
 		assertNotNull(bookingController);
-		String json = "{\"id\":null,\"roomId\":0,\"checkin\":\"2022-04-12\",\"checkout\":\"2022-04-12\",\"firstName\":null,\"lastName\":null,\"address\":null,\"city\":null,\"state\":null,\"creditCard\":null,\"expiry\":null,\"cvc\":0,\"pet\":false,\"crib\":false,\"lateCheckout\":false,\"extraTowels\":false}";
-		json = "{}";
+		String json = "{}";
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> probe = mapper.readValue(json, Map.class);
+		ResponseEntity<List<Booking>> bookings = bookingController.getAllBookingsByProbe(probe);
+		assertNotNull(bookings);
+		assertFalse(bookings.getBody().isEmpty());
+	}
+
+	@Test
+	void emptyBookingTest() throws JsonProcessingException {
+		assertNotNull(bookingController);
+		String json = "{\"lastName\":\"NO_MATCHES_SHOULD_EXIST\"}";
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setTimeZone(TimeZone.getTimeZone("PST")); // the DB timezone must match
 		Map<String, String> probe = mapper.readValue(json, Map.class);
 		ResponseEntity<List<Booking>> bookings = bookingController.getAllBookingsByProbe(probe);
 		assertNotNull(bookings);
-		assertFalse(bookings.getBody().isEmpty());
+		assertTrue(bookings.getBody().isEmpty());
 	}
 
 }

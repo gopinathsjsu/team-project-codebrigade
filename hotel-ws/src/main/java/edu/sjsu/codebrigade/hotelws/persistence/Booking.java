@@ -3,7 +3,7 @@ package edu.sjsu.codebrigade.hotelws.persistence;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "booking")
@@ -18,10 +18,10 @@ public class Booking {
     private int roomId;
 
     @Column(name = "checkin")
-    private Date checkin;
+    private LocalDate checkin;
 
     @Column(name = "checkout")
-    private Date checkout;
+    private LocalDate checkout;
 
     @Column(name = "first_name")
     private String firstName;
@@ -43,7 +43,7 @@ public class Booking {
     private String creditCard;
 
     @Column(name = "expiry")
-    private Date expiry;
+    private LocalDate expiry;
 
     @Column(name = "cvc")
     private int cvc;
@@ -186,11 +186,11 @@ public class Booking {
         this.creditCard = creditCard;
     }
 
-    public Date getExpiry() {
+    public LocalDate getExpiry() {
         return expiry;
     }
 
-    public void setExpiry(Date expiry) {
+    public void setExpiry(LocalDate expiry) {
         this.expiry = expiry;
     }
 
@@ -202,19 +202,19 @@ public class Booking {
         this.cvc = cvc;
     }
 
-    public Date getCheckin() {
+    public LocalDate getCheckin() {
         return checkin;
     }
 
-    public void setCheckin(Date checkin) {
+    public void setCheckin(LocalDate checkin) {
         this.checkin = checkin;
     }
 
-    public Date getCheckout() {
+    public LocalDate getCheckout() {
         return checkout;
     }
 
-    public void setCheckout(Date checkout) {
+    public void setCheckout(LocalDate checkout) {
         this.checkout = checkout;
     }
 
