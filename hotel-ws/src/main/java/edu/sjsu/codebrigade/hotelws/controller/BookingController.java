@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +29,7 @@ public class BookingController {
     private static final ObjectMapper mapper = JsonMapper.builder()
             .addModule(new JavaTimeModule()) // see https://github.com/FasterXML/jackson-modules-java8/tree/2.14/datetime#registering-module
             .build()
-            .setTimeZone(TimeZone.getTimeZone("PST"));
+            .setTimeZone(TimeZone.getTimeZone("PST")); // match DB time
 
     @GetMapping("/booking/{roomId}")
     public ResponseEntity<List<Booking>> get(@PathVariable int roomId,
@@ -57,7 +58,11 @@ public class BookingController {
         LocalDate checkin = newBooking.getCheckin();
         LocalDate checkout = newBooking.getCheckout();
         if (checkin == null || checkout == null || checkin.isAfter(checkout))
-            return ResponseEntity.badRequest().build();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "checkin cannot occur after checkout");
+        // ensure no bookings conflict/overlap
+        List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(newBooking.getRoomId(), checkin);
+        if (!existing.isEmpty())
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "checkin conflicts with "+ existing.size() +" existing booking(s)");
         Booking booking = bookingService.save(newBooking);
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
