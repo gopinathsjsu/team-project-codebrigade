@@ -1,23 +1,78 @@
-import React, { useState } from "react";
-import { Form, Card, Button, Image, Accordion, Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Form, Card, Button, Image, Accordion, Container, Row, Col, Spinner } from "react-bootstrap";
 import validator from "validator";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hotel, setHotel] = useState({});
+  const [amenitiesHtml, setAmenitiesHtml] = useState("loading amenities...");
 
-  // after form submit validating the form data using validator
   const submitFormData = (e) => {
     e.preventDefault();
 
-    // checking if value of first name and last name is empty show error else take to next step
     if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
-      setError(true);
+      setError("failed to validate form");
     } else {
       nextStep();
     }
   };
+
+  const restEndpoint = "http://localhost:8080/hotel";
+
+  // Note: the empty deps array [] means
+  // this useEffect will run once
+  // similar to componentDidMount()
+  useEffect(() => {
+    fetch("http://localhost:8080/hotel") // fetch a specific hotel room
+      .then(res => res.json())
+      .then(
+        (hotels) => {
+          setIsLoaded(true);
+          const hotel = hotels[0];// FIXME
+          console.log(hotel);
+          setHotel(hotel);
+          const amenitiesHtml = amenitiesToHtml(hotel.amenities);
+          setAmenitiesHtml(amenitiesHtml);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+  }, [])
+
+  function amenitiesToHtml(amenities) {
+    return amenities.map(
+      (amenity, i) => (<Row>
+        {i % 2 === 0 &&
+          <>
+            <Col key="i">
+              <Form.Check
+                type="checkbox"
+                id={amenity.name}
+                label={amenity.desc} />
+            </Col>
+            {amenities[i + 1] &&
+              <Col key="i">
+                <Form.Check
+                  type="checkbox"
+                  id={amenities[i + 1].name}
+                  label={amenities[i + 1].desc} />
+              </Col>}
+          </>}</Row>
+      )
+    )
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <Card className="mt-3">
@@ -25,8 +80,11 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
         <Card.Header>Reservation Details</Card.Header>
         <Card.Body>
           <Container>
+            {!isLoaded && <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>}
             <Row>
-              <Col><Card.Title>Deluxe Queen, Guest room, 1 Queen, City view</Card.Title></Col>
+              <Col><Card.Title>{hotel && hotel.rooms && hotel.rooms[0].name}</Card.Title></Col>
             </Row>
           </Container>
           <Card.Text>
@@ -56,65 +114,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
                     <Accordion.Header>Choose Room Options</Accordion.Header>
                     <Accordion.Body>
                       <Container>
-                        <Row>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Late check-in"
-                            /></Col>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Near elevator"
-                            /></Col>
-
-                        </Row>
-                        <Row>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Extra pillows"
-                            /></Col>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Rollaway bed"
-                            /></Col>
-
-                        </Row>
-                        <Row>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Crib"
-                            /></Col>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Waterbed"
-                            /></Col>
-
-                        </Row>
-                        <Row>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Extra towels"
-                            /></Col>
-                          <Col>
-                            <Form.Check
-                              type="checkbox"
-                              id="waterbed"
-                              label="Hairdryer"
-                            /></Col>
-                        </Row>
+                        {amenitiesHtml}
                       </Container>
                     </Accordion.Body>
                   </Accordion.Item>

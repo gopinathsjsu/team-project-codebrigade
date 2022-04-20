@@ -39,6 +39,11 @@ public class Hotel {
     @JsonIgnoreProperties("hotelId")
     private Set<Room> rooms;
 
+    @OneToMany(mappedBy = "hotelId", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("hotelId")
+    private Set<Amenities> amenities;
+
     public Integer getId() {
         return id;
     }
@@ -109,5 +114,13 @@ public class Hotel {
 
     public void setImage(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Set<Amenities> getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(Set<Amenities> amenities) {
+        this.amenities = amenities;
     }
 }

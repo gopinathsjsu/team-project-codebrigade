@@ -16,9 +16,6 @@ public class City {
     @Column(name = "country_id")
     private int countryId;
 
-    @Column(name = "city_id")
-    private int cityId;
-
     @Column(name = "postal_code")
     private int postalCode;
 
@@ -45,14 +42,6 @@ public class City {
 
     public void setCountryId(int countryId) {
         this.countryId = countryId;
-    }
-
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
     }
 
     public int getPostalCode() {
