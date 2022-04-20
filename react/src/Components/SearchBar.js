@@ -2,21 +2,20 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from "react-bootstrap/Form";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from "react-redux";
 import "./../Styles/searchBar.css";
 import "./../Assets/locIcon.png";
+import { fetchHotels } from "./../redux/searchHotels/searchAction";
 
 const SearchBar = () => {
 
     const [roomCount, setRoomCount] = useState(1);
     const [adultCount, setAdultCount] = useState(1);
     const [childCount, setChildCount] = useState(0);
-
-    const searchHotels = () => {
-        // call search API
-    };
+    const data = useSelector((state) => state.search.data);// search data
+    const dispatch = useDispatch();
 
     const getDate = (day) => {
         const today = new Date();
@@ -89,7 +88,7 @@ const SearchBar = () => {
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
-        <Button className="findButton" onClick={searchHotels()} variant="primary">Find Hotels</Button>
+        <Button className="findButton" onClick={() => dispatch(fetchHotels())} variant="primary">Find Hotels</Button>
     </span>
 }
 

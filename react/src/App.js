@@ -5,6 +5,8 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 import Booking from "./Pages/Booking";
 import Hotels from "./Pages/Hotels";
 import Home from "./Pages/Home";
@@ -13,8 +15,9 @@ import Login from "./Pages/Login";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
+    <Provider store={store}>
+      <div className="App">
+        <Router>
           <Routes>
             <Route exact path='/signUp' element={<Signup />} />
             <Route exact path='/login' element={<Login />} />
@@ -22,8 +25,9 @@ function App() {
             <Route exact path='/hotels' element={<Hotels />} />
             <Route exact path='/' element={<Home />} />
           </Routes>
-      </Router>
-    </div>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 
