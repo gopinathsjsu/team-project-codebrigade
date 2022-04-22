@@ -12,6 +12,7 @@ import Hotels from "./Pages/Hotels";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
+import MyTrips from "./Pages/MyTrips";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/booking' element={<Booking />} />
             <Route exact path='/hotels' element={<Hotels />} />
+            <Route exact path='/myTrips' element={<MyTrips />} />
             <Route exact path='/' element={<Home />} />
           </Routes>
         </Router>

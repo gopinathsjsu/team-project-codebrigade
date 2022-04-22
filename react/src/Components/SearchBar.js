@@ -14,6 +14,8 @@ const SearchBar = () => {
     const [roomCount, setRoomCount] = useState(1);
     const [adultCount, setAdultCount] = useState(1);
     const [childCount, setChildCount] = useState(0);
+    const [checkoutDate, setCheckoutDate] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
+    const [checkoutDateMax, setCheckoutDateMax] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
     const data = useSelector((state) => state.search.data);// search data
     const dispatch = useDispatch();
 
@@ -25,6 +27,10 @@ const SearchBar = () => {
         tomorrow.setDate(tomorrow.getDate() + 1);
         return tomorrow.toISOString().substr(0, 10);
     };
+
+    const updateCheckoutMax = (checkin) => {
+        setCheckoutDateMax(new Date(new Date().setDate(new Date(checkin).getDate() + 7)).toISOString().substr(0, 10))
+    }
 
     return <span className="contents">
         <Form.Group className="searchAttribute">
@@ -45,15 +51,18 @@ const SearchBar = () => {
                 id="checkIn"
                 placeholder="mm/dd/yyyy"
                 defaultValue={getDate("today")}
+                onChange={(e) => updateCheckoutMax(e.target.value)}
             />
         </Form.Group>
         <Form.Group className="searchAttribute">
             <Form.Label>Check Out</Form.Label>
             <Form.Control
                 type="date"
+                max={checkoutDateMax}
                 id="CheckOut"
                 placeholder="mm/dd/yyyy"
-                defaultValue={getDate("tommorow")}
+                value={checkoutDate}
+                onChange={(e) => setCheckoutDate(e.target.value)}
             />
         </Form.Group>
         <Dropdown autoclose="outside">

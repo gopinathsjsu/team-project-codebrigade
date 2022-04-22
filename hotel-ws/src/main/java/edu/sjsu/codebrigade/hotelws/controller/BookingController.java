@@ -3,6 +3,9 @@ package edu.sjsu.codebrigade.hotelws.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import edu.sjsu.codebrigade.hotelws.BookingCheckoutValidationHandler;
+import edu.sjsu.codebrigade.hotelws.BookingLengthValidationHandler;
+import edu.sjsu.codebrigade.hotelws.BookingValidationHandler;
 import edu.sjsu.codebrigade.hotelws.persistence.Booking;
 import edu.sjsu.codebrigade.hotelws.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,13 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+
+    private BookingValidationHandler checkoutValidation;
+
+    public BookingController() {
+        this.checkoutValidation = new BookingCheckoutValidationHandler();
+        this.checkoutValidation.setNext(new BookingLengthValidationHandler());
+    }
 
     // ObjectMapper is threadsafe, use a global for performance reasons
     private static final ObjectMapper mapper = JsonMapper.builder()
@@ -57,8 +67,15 @@ public class BookingController {
     public ResponseEntity<Booking> create(@RequestBody Booking newBooking) {
         LocalDate checkin = newBooking.getCheckin();
         LocalDate checkout = newBooking.getCheckout();
-        if (checkin == null || checkout == null || checkin.isAfter(checkout))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "checkin cannot occur after checkout");
+        try {
+            checkoutValidation.isOkay(checkin, checkout);
+        } catch (BookingValidationHandler.ValidationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+//        if (checkin == null || checkout == null || checkin.isAfter(checkout))
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "checkin cannot occur after checkout");
+//        if (checkin.plusDays(7).isBefore(checkout))
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "booking cannot exceed 7 days");
         // ensure no bookings conflict/overlap
         List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(newBooking.getRoomId(), checkin);
         if (!existing.isEmpty())
@@ -66,4 +83,5 @@ public class BookingController {
         Booking booking = bookingService.save(newBooking);
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
+
 }
