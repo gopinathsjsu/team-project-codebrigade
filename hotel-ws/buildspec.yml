@@ -5,14 +5,13 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 434366682375.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=434366682375.dkr.ecr.us-west-2.amazonaws.com/hotel-ws
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 434366682375.dkr.ecr.us-east-1.amazonaws.com
+      - REPOSITORY_URI=434366682375.dkr.ecr.us-east-1.amazonaws.com/hotel-ws
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - cd hotel-ws
-      - cat /root/.docker/config.json
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
