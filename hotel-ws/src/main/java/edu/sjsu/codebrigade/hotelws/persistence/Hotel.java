@@ -8,6 +8,14 @@ import java.util.Set;
 @Entity
 @Table(name = "hotel")
 public class Hotel {
+
+    public Hotel(int id, String name, int companyId, int cityId){
+        this.id = id;
+        this.name = name;
+        this.companyId = companyId;
+        this.cityId = cityId;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
