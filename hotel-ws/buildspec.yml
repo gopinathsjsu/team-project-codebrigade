@@ -7,6 +7,7 @@ phases:
   build:
     commands:
       - java -version
+      - cd hotel-ws
       - mvn package
 artifacts:
   files:
