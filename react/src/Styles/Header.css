@@ -2,6 +2,7 @@
   display: flex;
   background-color: #215C73;
   justify-content: flex-end;
+  height: 45px;
 }
 
 .App-header div {
@@ -12,13 +13,13 @@
   color: white;
 }
 
-.Sign-Up-link {
+.link {
   color: white;
   text-decoration: none;
   margin: auto 10px;
   font-weight: bold;
 }
 
-.Sign-Up-link:hover {
+.link:hover {
   color: #E1B47A;
 }

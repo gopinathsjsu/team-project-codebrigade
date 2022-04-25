@@ -14,8 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.sql.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -54,9 +53,9 @@ public class BookingControllerTest {
     @Test
     public void saveBooking() throws Exception {
         Booking newBooking = new Booking();
-        Date today = new Date(System.currentTimeMillis());
+        LocalDate today = LocalDate.now();
         newBooking.setCheckin(today);
-        newBooking.setCheckout(today);
+        newBooking.setCheckout(today.plusDays(1));
         String newBookingAsString = objectMapper.writeValueAsString(newBooking);
         Mockito.when(bookingService.save(newBooking)).thenReturn(newBooking);
 
@@ -71,8 +70,8 @@ public class BookingControllerTest {
     @Test
     public void saveBooking_checkin_after_checkout() throws Exception {
         Booking newBooking = new Booking();
-        Date today = new Date(System.currentTimeMillis());
-        Date yesterday = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+        LocalDate today = LocalDate.now();
+        LocalDate yesterday = today.minusDays(1);
         newBooking.setCheckin(today);
         newBooking.setCheckout(yesterday);
         String newBookingAsString = objectMapper.writeValueAsString(newBooking);
@@ -85,6 +84,25 @@ public class BookingControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void saveBooking_too_long() throws Exception {
+        Booking newBooking = new Booking();
+        LocalDate today = LocalDate.now();
+        LocalDate yesterday = today.plusDays(8);
+        newBooking.setCheckin(today);
+        newBooking.setCheckout(yesterday);
+        String newBookingAsString = objectMapper.writeValueAsString(newBooking);
+        Mockito.when(bookingService.save(newBooking)).thenReturn(newBooking);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/booking")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newBookingAsString))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
 
     @Test
     public void saveBooking_no_checkin() throws Exception {

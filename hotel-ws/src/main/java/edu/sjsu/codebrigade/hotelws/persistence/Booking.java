@@ -3,7 +3,7 @@ package edu.sjsu.codebrigade.hotelws.persistence;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "booking")
@@ -18,10 +18,10 @@ public class Booking {
     private int roomId;
 
     @Column(name = "checkin")
-    private Date checkin;
+    private LocalDate checkin;
 
     @Column(name = "checkout")
-    private Date checkout;
+    private LocalDate checkout;
 
     @Column(name = "first_name")
     private String firstName;
@@ -39,10 +39,11 @@ public class Booking {
     private String state;
 
     @Column(name = "credit_card")
+    @Convert(converter = CreditCardConverter.class)
     private String creditCard;
 
     @Column(name = "expiry")
-    private Date expiry;
+    private LocalDate expiry;
 
     @Column(name = "cvc")
     private int cvc;
@@ -93,19 +94,21 @@ public class Booking {
 
     @Access(AccessType.PROPERTY) // persist this property instead
     @Column(name = "options")
-    private int options;
+    private Integer options;
 
     @JsonIgnore
-    public int getOptions() {
+    public Integer getOptions() {
         return options;
     }
 
     @JsonIgnore
-    public void setOptions(int options) {
+    public void setOptions(Integer options) {
         this.options = options;
     }
 
     private void setOptionBit(boolean v, int n) {
+        if (this.options == null)
+            this.options = 0;
         if (v)
             this.options |= 1 << n;
         else
@@ -113,13 +116,13 @@ public class Booking {
     }
 
     private boolean getOptionBit(int n) {
-        return (this.options & 1 << n) != 0;
+        return this.options != null && (this.options & 1 << n) != 0;
     }
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "room_id", referencedColumnName = "id", nullable = false)
-    public int getRoomId() {
+    public Integer getRoomId() {
         return roomId;
     }
 
@@ -183,15 +186,15 @@ public class Booking {
         this.creditCard = creditCard;
     }
 
-    public Date getExpiry() {
+    public LocalDate getExpiry() {
         return expiry;
     }
 
-    public void setExpiry(Date expiry) {
+    public void setExpiry(LocalDate expiry) {
         this.expiry = expiry;
     }
 
-    public int getCvc() {
+    public Integer getCvc() {
         return cvc;
     }
 
@@ -199,19 +202,19 @@ public class Booking {
         this.cvc = cvc;
     }
 
-    public Date getCheckin() {
+    public LocalDate getCheckin() {
         return checkin;
     }
 
-    public void setCheckin(Date checkin) {
+    public void setCheckin(LocalDate checkin) {
         this.checkin = checkin;
     }
 
-    public Date getCheckout() {
+    public LocalDate getCheckout() {
         return checkout;
     }
 
-    public void setCheckout(Date checkout) {
+    public void setCheckout(LocalDate checkout) {
         this.checkout = checkout;
     }
 

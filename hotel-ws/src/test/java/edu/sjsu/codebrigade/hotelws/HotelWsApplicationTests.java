@@ -1,5 +1,7 @@
 package edu.sjsu.codebrigade.hotelws;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.sjsu.codebrigade.hotelws.controller.BookingController;
 import edu.sjsu.codebrigade.hotelws.controller.HotelController;
 import edu.sjsu.codebrigade.hotelws.persistence.Booking;
@@ -10,9 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class HotelWsApplicationTests {
@@ -31,11 +34,26 @@ class HotelWsApplicationTests {
 	}
 
 	@Test
-	void simpleBookingTest() {
+	void nonEmptyBookingTest() throws JsonProcessingException {
 		assertNotNull(bookingController);
-		ResponseEntity<List<Booking>> bookings = bookingController.getAllBookings();
+		String json = "{}";
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> probe = mapper.readValue(json, Map.class);
+		ResponseEntity<List<Booking>> bookings = bookingController.getAllBookingsByProbe(probe);
 		assertNotNull(bookings);
 		assertFalse(bookings.getBody().isEmpty());
+	}
+
+	@Test
+	void emptyBookingTest() throws JsonProcessingException {
+		assertNotNull(bookingController);
+		String json = "{\"lastName\":\"NO_MATCHES_SHOULD_EXIST\"}";
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setTimeZone(TimeZone.getTimeZone("PST")); // the DB timezone must match
+		Map<String, String> probe = mapper.readValue(json, Map.class);
+		ResponseEntity<List<Booking>> bookings = bookingController.getAllBookingsByProbe(probe);
+		assertNotNull(bookings);
+		assertTrue(bookings.getBody().isEmpty());
 	}
 
 }

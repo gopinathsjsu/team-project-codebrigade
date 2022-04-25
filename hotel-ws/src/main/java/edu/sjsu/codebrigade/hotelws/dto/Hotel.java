@@ -9,9 +9,11 @@ public class Hotel {
 
     }
 
-    public Hotel(int id, String name){
+    public Hotel(int id, String name, int companyId, int cityId){
         this.id = id;
         this.name = name;
+        this.companyId = companyId;
+        this.cityId = cityId;
     }
 
     private int id;
