@@ -10,11 +10,9 @@ import Hotels from "./Pages/Hotels";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
-<<<<<<< HEAD
 import SignupAdmin from "./Pages/SignupAdmin";
-=======
+import SearchResults from "./Pages/SearchResults";
 
->>>>>>> 2d985221347b61fc7bd69f04720ce6573ab02506
 function App() {
   return (
     <div className="App">
@@ -24,9 +22,10 @@ function App() {
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/booking' element={<Booking />} />
             <Route exact path='/hotels' element={<Hotels />} />
-            <Route exact path='/SignupAdmin' element={<SignupAdmin />} />
-            <Route exact path='/Login' element={<Login />} />
-            <Route exact path='/LoginAdmin' element={<Login />} />
+            <Route exact path='/signUpAdmin' element={<SignupAdmin />} />
+            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/loginAdmin' element={<Login />} />
+            <Route exact path='/searchResults' element={<SearchResults/>} />
             <Route exact path='/' element={<Home />} />
           </Routes>
       </Router>
