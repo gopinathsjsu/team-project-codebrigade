@@ -6,11 +6,16 @@
 
 .title {
   margin: 0 auto;
+  padding-top: 10px;
   width: fit-content;
   text-align: center;
   color: #142939;
   font-weight: bold;
   font-size: 25px;
+}
+
+.fields-container {
+  padding: 30px;
 }
 
 .field-container {
