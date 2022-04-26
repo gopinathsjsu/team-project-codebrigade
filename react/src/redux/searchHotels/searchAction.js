@@ -25,7 +25,7 @@ export const fetchHotels = () => {
   return (dispatch) => {
     dispatch(fetchHotelsRequest);
     //TODO: change this sample url with hotel url path while integration
-    axios.get("https://jsonplaceholder.typicode.com/users")
+    axios.get("http://localhost:8080/hotel")
     .then( (response) => {
       dispatch(fetchHotelsSuccess(response.data));
     })

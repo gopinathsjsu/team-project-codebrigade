@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./../Styles/searchBar.css";
 import "./../Assets/locIcon.png";
 import { fetchHotels } from "./../redux/searchHotels/searchAction";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
 
@@ -18,7 +19,11 @@ const SearchBar = () => {
     const [checkoutDateMax, setCheckoutDateMax] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
     const data = useSelector((state) => state.search.data);// search data
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
+     const searchHotels = () => {
+        dispatch(fetchHotels());
+        navigate("/searchResults");
+     };
     const getDate = (day) => {
         const today = new Date();
         if (day === "today")
@@ -97,7 +102,7 @@ const SearchBar = () => {
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
-        <Button className="findButton" onClick={() => dispatch(fetchHotels())} variant="primary">Find Hotels</Button>
+        <Button className="findButton" onClick={() => searchHotels()} variant="primary">Find Hotels</Button>
     </span>
 }
 
