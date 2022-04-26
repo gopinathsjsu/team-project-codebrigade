@@ -1,18 +1,15 @@
 import React, {useState} from "react";
 import UserPoolAdmin from "../UserPoolAdmin";
 import {useNavigate} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const SignupAdmin = () => {
     const [email, setEmail]= useState("")
     const [password, setPassword] = useState("");
-    const [name, setName]=  useState("");
-    const [address, setAddress ]=  useState("");
-    const [phone_number, setPhonenumber] =  useState("");
-
+  
     const onSubmit =(event) => {
         event.preventDefault();
 
-        UserPoolAdmin.signUp(email, password, name, address, phone_number, [], null, (err,data)=>{
+        UserPoolAdmin.signUp(email, password, [], null, (err,data)=>{
             if (err) {
                 console.error(err);
             }
@@ -21,39 +18,37 @@ const SignupAdmin = () => {
     };
     const navigate= useNavigate();
     return(
-        <div>
+        <div className="Contents">
+        <header className="title">Create an account</header>
+        <div className="fields-container">
             <form onSubmit={onSubmit}>
-                <label htmlFor="email">Email</label>
-                <input
-                    value={email}
-                    onChange={(event)=> setEmail(event.target.value)}
+                <div className="field-container">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        className="field"
+                        value={email}
+                        placeholder="email@domain.com"
+                        onChange={(event) => setEmail(event.target.value)}
                     ></input>
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(event)=> setPassword(event.target.value)}
+                </div>
+                <div className="field-container">
+                    <label htmlFor="password">Password</label>
+                    <input
+                        className="field"
+                        type="password"
+                        value={password}
+                        placeholder="password"
+                        onChange={(event) => setPassword(event.target.value)}
                     ></input>
-                <label htmlFor="name">Hotel Name</label>
-                <input
-                    value={name}
-                    onChange={(event)=> setName(event.target.value)}
-                    ></input>
-                <label htmlFor="address">Address</label>
-                <input
-                    value={address}
-                    onChange={(event)=> setAddress(event.target.value)}
-                    ></input>
-                <label htmlFor="phone_number">Contact number</label>
-                <input
-                    value={phone_number}
-                    onChange={(event)=> setPhonenumber(event.target.value)}
-                    ></input>
-                <button type="submit">Signup</button>
-                <button onClick={() => {navigate("/LoginAdmin")}}>Login?Already a hotel admin</button>
+                </div>
+                <div className="clikables">
+                        <span className="hint-text">Already a hotel admin? </span>
+                        <Link className="alternate-link" to="/loginAdmin">Signin</Link>
+                        <button className="login-button" type="submit">Create account</button>
+                    </div>
 
                 </form>
-
+            </div>
         </div>
     );
 };

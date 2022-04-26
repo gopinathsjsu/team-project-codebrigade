@@ -60,7 +60,7 @@ const Login = () => {
           <div>
           <span className="hint-text">No account? </span>
           <Link className="alternate-link" to="/signUp">Create account</Link>
-          <button className="login-button" type="submit">Sign in</button>
+          <button className="login-button" type="submit">Login</button>
           </div>
         </form>
       </div>
