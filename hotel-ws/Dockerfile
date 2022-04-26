@@ -9,7 +9,8 @@
 # ENTRYPOINT ["java","-jar","/app.jar"]
 
 ## Multi-stage build, from https://spring.io/guides/topicals/spring-boot-docker
-FROM openjdk:17-oracle as build
+# FROM openjdk:17-oracle as build
+FROM public.ecr.aws/docker/library/openjdk:17.0.2 as build
 WORKDIR /workspace/app
 
 COPY mvnw .
@@ -20,7 +21,7 @@ COPY src src
 RUN ./mvnw package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-FROM openjdk:17-oracle
+FROM public.ecr.aws/docker/library/openjdk:17.0.2
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
