@@ -9,6 +9,10 @@ import java.util.Set;
 @Table(name = "hotel")
 public class Hotel {
 
+    public Hotel(){
+
+    }
+
     public Hotel(int id, String name, int companyId, int cityId){
         this.id = id;
         this.name = name;
