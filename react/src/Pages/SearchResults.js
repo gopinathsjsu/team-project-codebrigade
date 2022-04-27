@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Button, Container, Row, Col, Figure } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
 import Header from "../Components/Header";
-import SearchBar from "../Components/SearchBar";
-import Booking from "./Booking";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const SearchResults = () => {
-  const hotels = [
-    { name: "Moxy Midtown", address: "761 Post Street San Francisco, California 94109", desc: "Enjoy comfort, convenience, and scenic views at our Union Square hotel.", rate: "From 250 USD/night" },
-    { name: "JW Marriott San Francisco Union Square", address: "515 Mason Street San Francisco, California 94102", desc: "A historic hotel with modern amenities in the heart of downtown San Francisco.", rate: "From 275 USD/night" },
-    { name: "San Francisco Marriott Marquis", address: "780 Mission Street San Francisco, California 94103", desc: "San Francisco Proper Hotel, the crossroads between historic splendor and its glistening present.", rate: "From 350 USD/night" }];
-  const hotelData = useSelector((state) => state.search.data);
-  
+
+  const hotels = useSelector((state) => state.search.data);
+    
   const hotelRow = (hotel, i) => {
     return (
       <Card key={i} className="mt-3">
@@ -34,7 +28,7 @@ const SearchResults = () => {
               <br/>
               <div>{hotel.desc}</div>
               </Col>
-              <Col className="text-end"><b>${hotel.rate}</b></Col>
+              <Col className="text-end"><b>From ${hotel.price} USD/night</b></Col>
               <Col className="button-container text-end"><Button variant="primary" onClick={() => select(hotel)}>View Rates</Button></Col>
             </Row>
           </Container>
@@ -52,7 +46,6 @@ const SearchResults = () => {
 
   return <>
     <Header />
-    <SearchBar></SearchBar>
     <Container>
       <Row>
         <Col>

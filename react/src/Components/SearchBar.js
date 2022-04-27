@@ -17,11 +17,11 @@ const SearchBar = () => {
     const [childCount, setChildCount] = useState(0);
     const [checkoutDate, setCheckoutDate] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
     const [checkoutDateMax, setCheckoutDateMax] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
-    const data = useSelector((state) => state.search.data);// search data
+    const [inputLocation, setLocation] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
      const searchHotels = () => {
-        dispatch(fetchHotels());
+        dispatch(fetchHotels(inputLocation));
         navigate("/searchResults");
      };
     const getDate = (day) => {
@@ -45,6 +45,7 @@ const SearchBar = () => {
                     type="text"
                     id="inputLocation"
                     placeholder="Where shall we go?"
+                    onChange={(e) => setLocation(e.target.value)}
                 />
                 <FontAwesomeIcon icon={faLocationDot} />
             </div>
