@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const SearchResults = () => {
   const hotels = [
-    { name: "Courtyard San Fransisco Union Square", address: "761 Post Street San Francisco, California 94109", desc: "Enjoy comfort, convenience, and scenic views at our Union Square hotel.", rate: "From 250 USD/night" },
+    { name: "Moxy Midtown", address: "761 Post Street San Francisco, California 94109", desc: "Enjoy comfort, convenience, and scenic views at our Union Square hotel.", rate: "From 250 USD/night" },
     { name: "JW Marriott San Francisco Union Square", address: "515 Mason Street San Francisco, California 94102", desc: "A historic hotel with modern amenities in the heart of downtown San Francisco.", rate: "From 275 USD/night" },
     { name: "San Francisco Marriott Marquis", address: "780 Mission Street San Francisco, California 94103", desc: "San Francisco Proper Hotel, the crossroads between historic splendor and its glistening present.", rate: "From 350 USD/night" }];
   const hotelData = useSelector((state) => state.search.data);
@@ -46,7 +46,8 @@ const SearchResults = () => {
   };
   const navigate = useNavigate();
   const select = (hotel) => {
-    navigate("/Booking")
+    navigate("/Booking", { state: { hotelName: hotel.name} });
+
   }
 
   return <>

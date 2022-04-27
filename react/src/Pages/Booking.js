@@ -6,10 +6,13 @@ import StepThree from "../Components/StepThree";
 import Final from "../Components/Final";
 import Total from "../Components/Total";
 import Breadcrumbs from "../Components/Breadcrumbs";
+import { useLocation } from "react-router";
 
 function Booking() {
   //state for steps
   const [step, setstep] = useState(1);
+  const {state} = useLocation();
+  const {hotelName} = state;
 
   //state for form data
   const [formData, setFormData] = useState({
@@ -53,7 +56,7 @@ function Booking() {
           <Container>
             <Row>
               <Col>
-                <StepOne nextStep={nextStep} handleFormData={handleInputData} values={formData} />
+                <StepOne nextStep={nextStep} handleFormData={handleInputData} values={hotelName} />
               </Col>
             </Row>
           </Container>
