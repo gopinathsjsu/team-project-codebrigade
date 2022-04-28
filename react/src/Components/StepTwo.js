@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Card, Button, Image, Accordion, Container, Row, Col, Spinner } from "react-bootstrap";
 import validator from "validator";
+import { useSelector, useDispatch } from "react-redux";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
@@ -9,6 +10,8 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hotel, setHotel] = useState({});
   const [amenitiesHtml, setAmenitiesHtml] = useState("loading amenities...");
+  const dates = useSelector((state) => state.search.dates);
+  console.log(dates);
 
   const submitFormData = (e) => {
     e.preventDefault();
@@ -49,17 +52,17 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
 
   function amenitiesToHtml(amenities) {
     return amenities.map(
-      (amenity, i) => (<Row>
+      (amenity, i) => (<Row key={i}>
         {i % 2 === 0 &&
           <>
-            <Col key="i">
+            <Col>
               <Form.Check
                 type="checkbox"
                 id={amenity.name}
                 label={amenity.desc} />
             </Col>
             {amenities[i + 1] &&
-              <Col key="i">
+              <Col>
                 <Form.Check
                   type="checkbox"
                   id={amenities[i + 1].name}
@@ -87,17 +90,16 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
               <Col><Card.Title>{hotel && hotel.rooms && hotel.rooms[0].name}</Card.Title></Col>
             </Row>
           </Container>
-          <Card.Text>
             <Container>
               <Row>
                 <Col><Image fluid={true} rounded={true} src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8" /></Col>
                 <Col>
                   <Container>
                     <Row>
-                      <Col>Check in: Friday, March 25, 2022</Col>
+                      <Col>Check in: {dates.checkin}</Col>
                     </Row>
                     <Row>
-                      <Col>Check out: Saturday, March 26, 2022</Col>
+                      <Col>Check out: {dates.checkout}</Col>
                     </Row>
                     <Row>
                       <Col>Room(s): 1</Col>
@@ -175,7 +177,6 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
                 </Accordion>
               </Row>
             </Container>
-          </Card.Text>
         </Card.Body>
         <Container className="mb-3">
           <Row className="text-end">

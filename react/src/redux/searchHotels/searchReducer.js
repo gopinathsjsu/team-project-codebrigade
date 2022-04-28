@@ -16,6 +16,7 @@ const searchReducer = (state = initialState, action) => {
       ...state,
       isLoading: false,
       data: action.payload,
+      dates: action.dates,
       error: ""
     }
     case FETCH_HOTELS_FAILURE: return {

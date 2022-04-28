@@ -7,10 +7,11 @@ export const fetchHotelsRequest = () => {
   }
 };
 
-export const fetchHotelsSuccess = (data) => {
+export const fetchHotelsSuccess = (data, dates) => {
   return {
     type: FETCH_HOTELS_SUCCESS,
-    payload: data
+    payload: data,
+    dates: dates
   }
 };
 
@@ -21,14 +22,14 @@ export const fetchHotelsFailure = (error) => {
   }
 };
 
-export const fetchHotels = (parameter) => {
+export const fetchHotels = (location, checkin, checkout) => {
   return (dispatch) => {
     dispatch(fetchHotelsRequest);
     const url = "http://localhost:8080/hotel";
     //TODO: change this sample url with hotel url path while integration
-    axios.get(url + "/" + parameter)
+    axios.get(url + "/" + location)
     .then( (response) => {
-      dispatch(fetchHotelsSuccess(response.data));
+      dispatch(fetchHotelsSuccess(response.data, {checkin: checkin, checkout: checkout}));
     })
     .catch((error) => {
       dispatch(fetchHotelsFailure(error.message));

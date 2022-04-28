@@ -15,13 +15,14 @@ const SearchBar = () => {
     const [roomCount, setRoomCount] = useState(1);
     const [adultCount, setAdultCount] = useState(1);
     const [childCount, setChildCount] = useState(0);
+    const [checkinDate, setCheckinDate] = useState(new Date().toISOString().substr(0, 10));
     const [checkoutDate, setCheckoutDate] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
     const [checkoutDateMax, setCheckoutDateMax] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
     const [inputLocation, setLocation] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
      const searchHotels = () => {
-        dispatch(fetchHotels(inputLocation));
+        dispatch(fetchHotels(inputLocation, checkinDate, checkoutDate));
         navigate("/searchResults");
      };
     const getDate = (day) => {
@@ -35,6 +36,7 @@ const SearchBar = () => {
 
     const updateCheckoutMax = (checkin) => {
         setCheckoutDateMax(new Date(new Date().setDate(new Date(checkin).getDate() + 7)).toISOString().substr(0, 10))
+        setCheckinDate(checkin);
     }
 
     return <span className="contents">
