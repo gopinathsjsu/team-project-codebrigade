@@ -15,6 +15,7 @@ import Login from "./Pages/Login";
 import SignupAdmin from "./Pages/SignupAdmin";
 import SearchResults from "./Pages/SearchResults";
 import MyTrips from "./Pages/MyTrips";
+import Rewards from "./Pages/Rewards";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route exact path='/loginAdmin' element={<Login />} />
             <Route exact path='/searchResults' element={<SearchResults/>} />
             <Route exact path='/myTrips' element={<MyTrips />} />
+            <Route exact path='/myRewards' element={<Rewards />} />
             <Route exact path='/' element={<Home />} />
           </Routes>
         </Router>

@@ -1,0 +1,97 @@
+.frame-one {
+    width: 1351px;
+    height: 158px;
+    background-color: #ffffff;
+    overflow: visible;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+    
+  }
+  .frame-two{
+    width: 1351px;
+    height: 387px;
+    background-color: #ffffff;
+    overflow: visible;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+  }
+.my-rewards {
+    
+    width: auto; /* 383px */
+    height: auto; /* 77px */
+    white-space:pre;
+    font-weight: 1000;
+    font-family: "Inter-Bold", "Inter", sans-serif;
+    color: #ffffff;
+    margin-left: 160px;
+    font-size: 64px;
+    letter-spacing: 0px;
+    line-height: 1.2;
+  }
+ 
+  ._500 {
+    width: auto; /* 283px */
+    height: auto; /* 173px */
+    white-space: pre;
+    font-weight: 600;
+    font-family: "Inter-SemiBold", "Inter", sans-serif;
+    color: #555353;
+    font-size: 144px;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    margin-left: 4%;
+  }
+  .points {
+    width: auto; /* 146px */
+    height: auto; /* 58px */
+    white-space: pre;
+    font-weight: 600;
+    font-family: "Inter-SemiBold", "Inter", sans-serif;
+    color: #555353;
+    font-size: 48px;
+    letter-spacing: 0px;
+    line-height: 1.2;
+  }
+
+  .instructions {
+    width: auto; /* 139px */
+    height: auto; /* 29px */
+    white-space: pre;
+    font-weight: 600;
+    font-family: "Inter-SemiBold", "Inter", sans-serif;
+    color: #555353;
+    font-size: 24px;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    margin-left: 4%;
+  }
+  .text {
+    width: auto; /* 404px */
+    height: auto; /* 43px */
+    white-space: pre;
+    font-weight: 600;
+    font-family: "Inter-SemiBold", "Inter", sans-serif;
+    color: #555353;
+    font-size: 36px;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    margin-left: 4%;
+  }
+  .text-one {
+    width: auto; /* 566px */
+    height: auto; /* 58px */
+    white-space: pre;
+    font-weight: 600;
+    font-family: "Inter-SemiBold", "Inter", sans-serif;
+    color: #555353;
+    font-size: 24px;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    margin-left: 4%;
+  }
