@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import "./../Styles/MyTrips.css";
@@ -7,17 +7,41 @@ import { Card, Button, Container, Row, Col, Figure } from "react-bootstrap";
 const MyTrips = () => {
 
   let navigate = useNavigate();
+  const server = 'http://localhost:8080';
+  const [trips, setTrips] = useState([]);
+  const [hotels, setHotels] = useState({});
 
-  const trips = [
-    { id: "1", name: "Courtyard San Francisco Union Square", startDate: "04/12/2022", endDate: "04/12/2022" },
-    { id: "2",name: "JW Marriott San Francisco Union Square", startDate: "04/12/2022", endDate: "04/12/2022" },
-    { id: "3",name: "San Francisco Marriott Marquis", startDate: "04/12/2022", endDate: "04/12/2022" }];
+  useEffect(() => {
+    async function getTrips() {
+      const tripsResponse = await fetch(server + "/booking?firstName=sa&lastName=virk");
+      const trips = await tripsResponse.json();
+      const hotels = await fetchHotels(trips);
+      setTrips(trips)
+      setHotels(hotels);
+    }
+    getTrips();
+  }, [])
+
+  async function fetchHotels(trips) {
+    const fetchedHotels = {};
+    for (let i = 0; i < trips.length; i++) {
+      let trip = trips[i];
+      if (!fetchedHotels[trip.roomId]) {
+        // fetch hotel for this trip
+        const response = await fetch(server + '/hotel/room/' + trip.roomId);
+        const hotels = await response.json();
+        console.log(hotels[0]);
+        fetchedHotels[trip.roomId] = hotels[0];
+      }
+    }
+    return fetchedHotels;
+  }
 
   const tripRow = (trip, i) => {
     return (
       <Card key={i} className="mt-3">
         <Card.Body className="ml-3">
-          <Container>
+          <Container fluid>
             <Row>
               <Col>
                 <Figure.Image
@@ -28,9 +52,9 @@ const MyTrips = () => {
                 />
               </Col>
               <Col xs={5}>
-              <Card.Title>{trip.name}</Card.Title>
+                <Card.Title>{hotels[trip.roomId] ? hotels[trip.roomId].name : "unknown hotel"}</Card.Title>
               </Col>
-              <Col className="text-end">{trip.startDate} to {trip.endDate}</Col>
+              <Col className="text-end">{trip.checkin} to {trip.checkout}</Col>
               <Col className="text-end"><Button variant="primary" onClick={() => select(trip.id)}>View Details</Button></Col>
             </Row>
           </Container>
