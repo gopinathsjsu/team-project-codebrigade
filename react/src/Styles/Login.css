@@ -47,3 +47,7 @@
 .hint-text {
   font-size: 12px;
 }
+
+.error-msg {
+  color: red;
+}
