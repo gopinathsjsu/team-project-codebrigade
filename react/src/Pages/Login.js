@@ -25,7 +25,7 @@ const Login = () => {
     user.authenticateUser(authDetails, {
       onSuccess: (data) => {
         const idToken = data.getIdToken().getJwtToken();
-        localStorage.setItem("userEmail",jwt_decode(idToken).email);
+        sessionStorage.setItem("userEmail",jwt_decode(idToken).email);
       },
       onFailure: (err) => {
         setErrorMessage(err.message);
