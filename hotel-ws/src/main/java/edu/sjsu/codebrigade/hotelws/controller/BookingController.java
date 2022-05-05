@@ -72,11 +72,6 @@ public class BookingController {
         } catch (BookingValidationHandler.ValidationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-//        if (checkin == null || checkout == null || checkin.isAfter(checkout))
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "checkin cannot occur after checkout");
-//        if (checkin.plusDays(7).isBefore(checkout))
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "booking cannot exceed 7 days");
-        // ensure no bookings conflict/overlap
         List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(newBooking.getRoomId(), checkin);
         if (!existing.isEmpty())
             throw new ResponseStatusException(HttpStatus.CONFLICT, "checkin conflicts with "+ existing.size() +" existing booking(s)");
