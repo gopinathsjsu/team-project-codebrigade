@@ -6,6 +6,8 @@ import validator from "validator";
 const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
   const [error, setError] = useState(false);
+  const [rewardPoints, setRewardPoints] = useState(10);
+  const [rewardschecked, setRewardschecked] = useState(false);
 
   // after form submit validating the form data using validator
   const submitFormData = (e) => {
@@ -18,7 +20,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
       nextStep();
     }
   };
-
+  
   return (
     <Card className="mt-3">
       <Form onSubmit={submitFormData}>
@@ -36,19 +38,19 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                   <Row>
                     <Col>
                       <Form.Label>First Name</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Form.Label>Last Name</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" placeholder="" required/>
+                      <Form.Control type="email" placeholder="" required />
                       <Form.Text className="text-muted">
                         We'll never share your email.
                       </Form.Text>
@@ -59,44 +61,59 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                   <Row>
                     <Col>
                       <Form.Label>Address</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Form.Label>City</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Form.Label>State</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                     <Col>
                       <Form.Label>Zip</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                   </Row>
                 </Col>
               </Row>
               <hr />
+              {rewardPoints ? <>
+                <Row>
+                    <Col>
+                    <span>Your reward points: {rewardPoints}</span>
+                    </Col>
+                    <Col>
+                    <label>
+                      <input type="checkbox" checked={rewardschecked} onChange={() => setRewardschecked(!rewardschecked)} />
+                      Redeem your Reward Points
+                    </label>
+                    </Col>
+                    <Col></Col>
+                    <Col></Col>
+                  </Row>
+              </> : ""}
               <Row>
                 <Col>
                   <Row>
                     <Col>
                       <Form.Label>Credit Card</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Form.Label>Expiry</Form.Label>
-                      <Form.Control type="text" placeholder="" required/>
+                      <Form.Control type="text" placeholder="" required />
                     </Col>
                     <Col>
                       <Form.Label>CVC</Form.Label>
-                      <Form.Control type="number" placeholder="" required/>
+                      <Form.Control type="number" placeholder="" required />
                     </Col>
                   </Row>
                 </Col>
