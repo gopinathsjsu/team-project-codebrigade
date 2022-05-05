@@ -4,13 +4,13 @@ import UserPool from "../UserPool";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
 import Header from "../Components/Header";
-import { fetchHotels } from "./../redux/searchHotels/searchAction";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { postCustomer } from "../redux/regCustomer/regCustomerAction";
 const AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 
 
 const Signup = () => {
-    
+    const dispatch = useDispatch();
     const [email, setEmail]= useState("")
     const [password, setPassword] = useState("");
   
@@ -20,11 +20,10 @@ const Signup = () => {
         UserPool.signUp(email, password, [], null,(err,data)=>{
         if (err) {
             console.error(err);
-            return;
+        } else {
+            console.error(data);
+            dispatch(postCustomer(email));
         }
-        else
-        console.log(data) 
-        
     });
    
     };
