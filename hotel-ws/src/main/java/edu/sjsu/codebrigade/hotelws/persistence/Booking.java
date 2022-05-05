@@ -221,4 +221,11 @@ public class Booking {
         this.checkout = checkout;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -14,8 +14,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/customer/rewards/{emailId}")
-    public ResponseEntity<Float> getRewardPoints(@PathVariable String emailId) {
-        Float rewardPoints = customerService.getRewardPoints(emailId);
+    public ResponseEntity<Integer> getRewardPoints(@PathVariable String emailId) {
+        int rewardPoints = customerService.getRewardPoints(emailId);
         return ResponseEntity.ok().body(rewardPoints);
     }
 

@@ -27,7 +27,7 @@ public class Customer {
     private String userName;
 
     @Column(name = "reward_points")
-    private float rewardPoints;
+    private int rewardPoints;
 
     public String getUserName() {
         return userName;
@@ -41,7 +41,7 @@ public class Customer {
         return rewardPoints;
     }
 
-    public void setRewardPoints(float rewardPoints) {
+    public void setRewardPoints(int rewardPoints) {
         this.rewardPoints = rewardPoints;
     }
 

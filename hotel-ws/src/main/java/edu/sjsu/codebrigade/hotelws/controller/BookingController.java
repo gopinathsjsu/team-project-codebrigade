@@ -8,6 +8,7 @@ import edu.sjsu.codebrigade.hotelws.BookingLengthValidationHandler;
 import edu.sjsu.codebrigade.hotelws.BookingValidationHandler;
 import edu.sjsu.codebrigade.hotelws.persistence.Booking;
 import edu.sjsu.codebrigade.hotelws.service.BookingService;
+import edu.sjsu.codebrigade.hotelws.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -76,6 +77,7 @@ public class BookingController {
         if (!existing.isEmpty())
             throw new ResponseStatusException(HttpStatus.CONFLICT, "checkin conflicts with "+ existing.size() +" existing booking(s)");
         Booking booking = bookingService.save(newBooking);
+        new CustomerService().updateRewardPoints(newBooking.getEmail());
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
 
