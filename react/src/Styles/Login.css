@@ -51,3 +51,7 @@
 .error-msg {
   color: red;
 }
+
+.margintop10 {
+  margin-top: 10px !important;
+}
