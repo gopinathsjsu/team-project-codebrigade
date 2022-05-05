@@ -4,14 +4,15 @@ import UserPool from "../UserPool";
 import "../Styles/Login.css";
 import { Link } from "react-router-dom";
 import Header from "../Components/Header";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = (event) => {
     event.preventDefault();
-
     const user = new CognitoUser({
       Username: email,
       Pool: UserPool,
@@ -24,10 +25,11 @@ const Login = () => {
 
     user.authenticateUser(authDetails, {
       onSuccess: (data) => {
-        console.log("onSuccess: ", data);
+        const idToken = data.getIdToken().getJwtToken();
+        sessionStorage.setItem("userEmail",jwt_decode(idToken).email);
       },
       onFailure: (err) => {
-        console.error("onFailure: ", err);
+        setErrorMessage(err.message);
       },
       newPasswordRequired: (data) => {
         console.log("newPasswordRequired: ", data);
@@ -56,6 +58,7 @@ const Login = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             ></input>
+            {errorMessage? <div className="error-msg">{errorMessage}</div> : <span></span>}
           </div>
           <span className="hint-text">Forgot your password? </span>
           <Link className="alternate-link" to="/login">Reset password</Link>

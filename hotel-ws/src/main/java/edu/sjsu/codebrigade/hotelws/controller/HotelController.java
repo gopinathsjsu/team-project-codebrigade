@@ -28,4 +28,11 @@ public class HotelController {
         List<Hotel> hotels = hotelService.getHotelsByCity(cityName);
         return ResponseEntity.ok().body(hotels);
     }
+
+    @GetMapping("/hotel/room/{roomId}")
+    public ResponseEntity<List<Hotel>> getHotelsByRoomId(@PathVariable int roomId) {
+        List<Hotel> hotels = hotelService.getHotelsByRoomId(roomId);
+        return ResponseEntity.ok().body(hotels);
+    }
+
 }

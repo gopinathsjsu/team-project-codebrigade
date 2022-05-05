@@ -11,8 +11,12 @@
     "amazon-cognito-identity-js": "^5.2.8",
     "axios": "^0.26.1",
     "bootstrap": "^5.1.1",
+<<<<<<< HEAD
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
+=======
+    "jwt-decode": "^3.1.2",
+>>>>>>> 0ede0ee0c7b92658893dd752a9224b9e2d0b287c
     "react": "^17.0.2",
     "react-app-rewired": "^2.2.1",
     "react-bootstrap": "^2.2.0",

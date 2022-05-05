@@ -16,6 +16,10 @@ public class HotelService {
         return hotelRepository.fetchHotelsByCity(cityName);
     }
 
+    public List<edu.sjsu.codebrigade.hotelws.persistence.Hotel> getHotelsByRoomId(int roomId) {
+        return hotelRepository.fetchHotelsByRoomId(roomId);
+    }
+
     public List<edu.sjsu.codebrigade.hotelws.persistence.Hotel> getAllHotels() {
         return hotelRepository.fetchAllHotels();
     }

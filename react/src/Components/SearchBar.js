@@ -22,7 +22,7 @@ const SearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
      const searchHotels = () => {
-        dispatch(fetchHotels(inputLocation, checkinDate, checkoutDate));
+        dispatch(fetchHotels(inputLocation, checkinDate, checkoutDate, roomCount, adultCount+childCount));
         navigate("/searchResults");
      };
     const getDate = (day) => {
