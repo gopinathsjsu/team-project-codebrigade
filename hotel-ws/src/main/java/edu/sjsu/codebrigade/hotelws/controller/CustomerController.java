@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CustomerController {
 
@@ -21,13 +23,22 @@ public class CustomerController {
 
     @PostMapping("/customer")
     @ResponseBody
-    public ResponseEntity<Customer> create(@RequestBody String email) {
-        Customer newCustomer = new Customer();
-        newCustomer.setEmail(email);
+    public ResponseEntity<Customer> create(@RequestBody Customer newCustomer) {
         newCustomer.setRewardPoints(0);
-        newCustomer.setUserName(email.split("@")[0]);
+        newCustomer.setUserName(newCustomer.getEmail().split("@")[0]);
         Customer customer = customerService.save(newCustomer);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
+    }
+
+    public void update(@RequestBody String email) {
+        customerService.updateRewardPoints(email);
+    }
+
+    @GetMapping("/customer")
+    @ResponseBody
+    public ResponseEntity<List<Customer>> get() {
+        List<Customer> customerList = customerService.getCustomerDetails();
+        return ResponseEntity.ok().body(customerList);
     }
 
 }

@@ -7,6 +7,7 @@ import edu.sjsu.codebrigade.hotelws.BookingCheckoutValidationHandler;
 import edu.sjsu.codebrigade.hotelws.BookingLengthValidationHandler;
 import edu.sjsu.codebrigade.hotelws.BookingValidationHandler;
 import edu.sjsu.codebrigade.hotelws.persistence.Booking;
+import edu.sjsu.codebrigade.hotelws.persistence.Customer;
 import edu.sjsu.codebrigade.hotelws.service.BookingService;
 import edu.sjsu.codebrigade.hotelws.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private CustomerController customerController;
 
     private BookingValidationHandler checkoutValidation;
 
@@ -75,9 +79,9 @@ public class BookingController {
         }
         List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(newBooking.getRoomId(), checkin);
         if (!existing.isEmpty())
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "checkin conflicts with "+ existing.size() +" existing booking(s)");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "checking conflicts with "+ existing.size() +" existing booking(s)");
         Booking booking = bookingService.save(newBooking);
-        new CustomerService().updateRewardPoints(newBooking.getEmail());
+        customerController.update(newBooking.getEmail());
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
 

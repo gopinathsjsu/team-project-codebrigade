@@ -6,18 +6,10 @@ import javax.persistence.*;
 @Table(name = "customer")
 @Access(AccessType.FIELD)
 public class Customer {
-    public Customer(){
-
-    }
-
-    public Customer(int id, String email){
-        this.id = id;
-        this.email = email;
-    }
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "email")
