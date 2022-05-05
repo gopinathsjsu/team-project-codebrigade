@@ -7,7 +7,7 @@ const Header = () => {
     <header className="App-header">
       <Link className="link" to="/">Home</Link>
       <Link className="link" to="/myRewards">My Rewards</Link>
-      <Link className="link" to="/login">SignIn or Join</Link>
+      <Link className="link" to="/signInOrJoin">SignIn or Join</Link>
       <Link className="link" to="/myTrips">My Trips</Link>
 
       <div></div>

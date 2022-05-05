@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Card, Button, Container, Row, Col } from "react-bootstrap";
 import validator from "validator";
+import { useSelector, useDispatch } from "react-redux";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {

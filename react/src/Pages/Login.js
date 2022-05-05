@@ -3,6 +3,7 @@ import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPool from "../UserPool";
 import "../Styles/Login.css";
 import { Link } from "react-router-dom";
+import Header from "../Components/Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,7 +35,8 @@ const Login = () => {
     });
   };
 
-  return (
+  return <>
+  <Header/>
     <div className="Contents">
       <header className="title">Sign in to your account</header>
       <div className="fields-container">
@@ -65,7 +67,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
+  </>
 };
 
 export default Login;

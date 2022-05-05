@@ -2,6 +2,10 @@ import React, {useState} from "react";
 import UserPoolAdmin from "../UserPoolAdmin";
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
+import Header from "../Components/Header";
+import { useEffect } from "react";
+
+
 const SignupAdmin = () => {
     const [email, setEmail]= useState("")
     const [password, setPassword] = useState("");
@@ -13,11 +17,17 @@ const SignupAdmin = () => {
             if (err) {
                 console.error(err);
             }
+            else{
             console.log(data)
+            }
          });
+
+
+
     };
     const navigate= useNavigate();
-    return(
+    return<>
+        <Header/>
         <div className="Contents">
         <header className="title">Create an account</header>
         <div className="fields-container">
@@ -50,7 +60,7 @@ const SignupAdmin = () => {
                 </form>
             </div>
         </div>
-    );
+        </>
 };
 
 export default SignupAdmin;
