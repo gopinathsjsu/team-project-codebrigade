@@ -23,6 +23,10 @@ public class BookingService {
         return bookingRepository.fetchBookingsByRoomIdAndDate(roomId, date);
     }
 
+    public int getRoomIdByRoomTypeAndHotelName(String roomType, String hotelName){
+        return bookingRepository.fetchRoomIdByRoomTypeAndHotelName(roomType, hotelName);
+    }
+
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }

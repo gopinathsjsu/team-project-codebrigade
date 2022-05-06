@@ -51,6 +51,12 @@ public class Booking {
     @Column(name = "cvc")
     private int cvc;
 
+    @Column(name = "hotelName")
+    private String hotelName;
+
+    @Column(name = "roomType")
+    private String roomType;
+
     public boolean isPet() {
         return getOptionBit(1);
     }
@@ -227,5 +233,21 @@ public class Booking {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
     }
 }

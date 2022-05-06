@@ -72,6 +72,8 @@ public class BookingController {
     public ResponseEntity<Booking> create(@RequestBody Booking newBooking) {
         LocalDate checkin = newBooking.getCheckin();
         LocalDate checkout = newBooking.getCheckout();
+        int roomId = bookingService.getRoomIdByRoomTypeAndHotelName(newBooking.getRoomType(), newBooking.getHotelName());
+        newBooking.setRoomId(roomId);
         try {
             checkoutValidation.isOkay(checkin, checkout);
         } catch (BookingValidationHandler.ValidationException e) {
