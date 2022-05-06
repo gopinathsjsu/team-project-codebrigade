@@ -57,20 +57,13 @@ public class Booking {
     @Column(name = "roomType")
     private String roomType;
 
-    public boolean isPet() {
+
+    public boolean isCrib() {
         return getOptionBit(1);
     }
 
-    public void setPet(boolean pet) {
-        setOptionBit(pet, 1);
-    }
-
-    public boolean isCrib() {
-        return getOptionBit(2);
-    }
-
     public void setCrib(boolean crib) {
-        setOptionBit(crib, 2);
+        setOptionBit(crib, 1);
     }
 
     public boolean isLateCheckout() {
@@ -90,16 +83,25 @@ public class Booking {
     }
 
     @Transient // do not persist this field
-    private boolean pet;
+    private boolean breakfast;
 
     @Transient // do not persist this field
     private boolean crib;
 
     @Transient // do not persist this field
-    private boolean lateCheckout;
+    private boolean fitness;
 
     @Transient // do not persist this field
-    private boolean extraTowels;
+    private boolean late;
+
+    @Transient // do not persist this field
+    private boolean meals;
+
+    @Transient // do not persist this field
+    private boolean parking;
+
+    @Transient // do not persist this field
+    private boolean pool;
 
     @Access(AccessType.PROPERTY) // persist this property instead
     @Column(name = "options")
@@ -249,5 +251,53 @@ public class Booking {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public boolean isBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(boolean breakfast) {
+        this.breakfast = breakfast;
+    }
+
+    public boolean isFitness() {
+        return fitness;
+    }
+
+    public void setFitness(boolean fitness) {
+        this.fitness = fitness;
+    }
+
+    public boolean isLate() {
+        return late;
+    }
+
+    public void setLate(boolean late) {
+        this.late = late;
+    }
+
+    public boolean isMeals() {
+        return meals;
+    }
+
+    public void setMeals(boolean meals) {
+        this.meals = meals;
+    }
+
+    public boolean isParking() {
+        return parking;
+    }
+
+    public void setParking(boolean parking) {
+        this.parking = parking;
+    }
+
+    public boolean isPool() {
+        return pool;
+    }
+
+    public void setPool(boolean pool) {
+        this.pool = pool;
     }
 }
