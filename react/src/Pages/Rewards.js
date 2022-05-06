@@ -1,9 +1,9 @@
 import "./../Styles/Rewards.css";
 import Header from "../Components/Header";
+import {useSelector} from "react-redux";
 
-
-const myRewards= () =>{
-    const rewards={points:500};
+const MyRewards= () =>{
+    const rewards = useSelector((state) => state.rewards.data);
     return<>
     <Header/>
     <div className="my-rewards">
@@ -20,10 +20,10 @@ const myRewards= () =>{
       <div className="frame-two">
         <span className="text"><br/><h1>Currently Accumulated</h1>
         <br/>
-       <span className="_500" >{rewards.points}</span>
+       <span className="_500" >{rewards}</span>
         </span>
         <span className="points">Points</span>
       </div>
       </>
 }
-export default myRewards;
+export default MyRewards;

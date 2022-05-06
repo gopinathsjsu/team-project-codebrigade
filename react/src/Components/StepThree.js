@@ -25,6 +25,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     cvc: ""
   });
   const bookingState = useSelector((state) => state.bookingState.data);
+  const rewards = useSelector((state) => state.rewards.data);
 
   // after form submit validating the form data using validator
   const submitFormData = (e) => {
@@ -105,7 +106,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
               {rewardPoints ? <>
                 <Row>
                   <Col>
-                    <span>Your reward points: {rewardPoints}</span>
+                    <span>Your reward points: {rewards}</span>
                   </Col>
                   <Col>
                     <label>
