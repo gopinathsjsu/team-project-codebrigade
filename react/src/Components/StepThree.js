@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Card, Button, Container, Row, Col } from "react-bootstrap";
 import validator from "validator";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import updateBookingState from "../redux/bookingState/bookingStateAction";
+import { postBooking } from "../redux/booking/bookingAction";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
@@ -23,7 +24,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     cardNumber: "",
     cvc: ""
   });
-  
+
   // after form submit validating the form data using validator
   const submitFormData = (e) => {
     e.preventDefault();
@@ -31,7 +32,8 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
       setError(true);
     } else {
-    dispatch(updateBookingState({...values, ...state}));
+      dispatch(updateBookingState({ ...values, ...state }));
+      dispatch(postBooking({ ...values, ...state }));
       nextStep();
     }
   };
@@ -124,11 +126,11 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                   <Row>
                     <Col>
                       <Form.Label>Expiry *</Form.Label>
-                      <Form.Control value={state.expiry} onChange={e => setState({ ...state, expiry: e.target.value })}type="text" placeholder="" required />
+                      <Form.Control value={state.expiry} onChange={e => setState({ ...state, expiry: e.target.value })} type="text" placeholder="" required />
                     </Col>
                     <Col>
                       <Form.Label>CVC *</Form.Label>
-                      <Form.Control value={state.cvc} onChange={e => setState({ ...state, cvc: e.target.value })}type="number" placeholder="" required />
+                      <Form.Control value={state.cvc} onChange={e => setState({ ...state, cvc: e.target.value })} type="number" placeholder="" required />
                     </Col>
                   </Row>
                 </Col>

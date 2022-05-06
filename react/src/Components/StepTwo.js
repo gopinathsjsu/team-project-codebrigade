@@ -15,11 +15,9 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   const [daysHtml, setDaysHtml] = useState("loading days...");
   const dates = useSelector((state) => state.search.dates);
   const guests = useSelector((state) => state.search.guests);
-  const obj = useSelector((state) => state.bookingState.data);
   const dispatch = useDispatch();
 
   var getDaysArray = function (start, end) {
-    console.log("obj: ", obj);
     for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
       arr.push(new Date(dt).toISOString().substr(0, 10));
     }
