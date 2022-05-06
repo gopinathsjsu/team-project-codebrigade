@@ -21,7 +21,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     zip: "",
     rewardschecked: false,
     expiry: "",
-    cardNumber: "",
+    creditCard: "",
     cvc: ""
   });
   const bookingState = useSelector((state) => state.bookingState.data);
@@ -33,8 +33,9 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
       setError(true);
     } else {
-      dispatch(updateBookingState({ ...bookingState, ...state }));
-      dispatch(postBooking({ ...bookingState, ...state }));
+      const resultState = { ...bookingState, ...state }
+      dispatch(updateBookingState(resultState));
+      dispatch(postBooking(resultState));
       nextStep();
     }
   };
@@ -121,7 +122,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                   <Row>
                     <Col>
                       <Form.Label>Credit Card *</Form.Label>
-                      <Form.Control value={state.cardNumber} onChange={e => setState({ ...state, cardNumber: e.target.value })} type="text" placeholder="" required />
+                      <Form.Control value={state.creditCard} onChange={e => setState({ ...state, creditCard: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>

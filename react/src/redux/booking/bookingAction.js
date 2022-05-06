@@ -22,11 +22,18 @@ export const postBookingFailure = (error) => {
 };
 
 export const postBooking = (bookingState) => {
+  const config = {
+    method: "post",
+    url: "http://localhost:8080/booking",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: bookingState
+  }
   return (dispatch) => {
     dispatch(postBookingRequest);
-    const url = "http://localhost:8080/booking";
     //TODO: change this sample url with hotel url path while integration
-    axios.post(url)
+    axios(config)
     .then( () => {
       dispatch(postBookingSuccess(bookingState));
     })
