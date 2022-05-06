@@ -1,5 +1,6 @@
 package edu.sjsu.codebrigade.hotelws.persistence;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -17,9 +18,11 @@ public class Booking {
     @Column(name = "room_id")
     private int roomId;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "checkin")
     private LocalDate checkin;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "checkout")
     private LocalDate checkout;
 
@@ -45,6 +48,7 @@ public class Booking {
     @Convert(converter = CreditCardConverter.class)
     private String creditCard;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "expiry")
     private LocalDate expiry;
 
