@@ -57,6 +57,11 @@ public class Booking {
     @Column(name = "roomType")
     private String roomType;
 
+    @Transient
+    private String zip;
+
+    @Transient
+    private boolean rewardsChecked = false;
 
     public boolean isCrib() {
         return getOptionBit(1);
@@ -299,5 +304,21 @@ public class Booking {
 
     public void setPool(boolean pool) {
         this.pool = pool;
+    }
+
+    public boolean isRewardsChecked() {
+        return rewardsChecked;
+    }
+
+    public void setRewardsChecked(boolean rewardsChecked) {
+        this.rewardsChecked = rewardsChecked;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 }
