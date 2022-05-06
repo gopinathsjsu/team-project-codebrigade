@@ -5,6 +5,7 @@ const Final = ({ values }) => {
 
   //destructuring the object from values
   const { firstName, lastName, phoneNumber, creditCard, cvc } = values;
+  
   return (
     <>
       <Card className="mt-3">

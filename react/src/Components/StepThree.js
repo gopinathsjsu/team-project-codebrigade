@@ -1,27 +1,44 @@
 import React, { useState } from "react";
 import { Form, Card, Button, Container, Row, Col } from "react-bootstrap";
 import validator from "validator";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import updateBookingState from "../redux/bookingState/bookingStateAction";
+import { postBooking } from "../redux/booking/bookingAction";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
+  const dispatch = useDispatch();
   const [error, setError] = useState(false);
   const [rewardPoints, setRewardPoints] = useState(10);
-  const [rewardschecked, setRewardschecked] = useState(false);
+  const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    rewardschecked: false,
+    expiry: "",
+    cardNumber: "",
+    cvc: ""
+  });
+  const bookingState = useSelector((state) => state.bookingState.data);
 
   // after form submit validating the form data using validator
   const submitFormData = (e) => {
     e.preventDefault();
-
     // checking if value of first name and last name is empty show error else take to next step
     if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
       setError(true);
     } else {
+      dispatch(updateBookingState({ ...bookingState, ...state }));
+      dispatch(postBooking({ ...bookingState, ...state }));
       nextStep();
     }
   };
-  
+
   return (
     <Card className="mt-3">
       <Form onSubmit={submitFormData}>
@@ -38,20 +55,20 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                 <Col>
                   <Row>
                     <Col>
-                      <Form.Label>First Name</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>First Name *</Form.Label>
+                      <Form.Control value={state.firstName} onChange={e => setState({ ...state, firstName: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Form.Label>Last Name</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>Last Name *</Form.Label>
+                      <Form.Control value={state.lastName} onChange={e => setState({ ...state, lastName: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" placeholder="" required />
+                      <Form.Label>Email address *</Form.Label>
+                      <Form.Control value={state.email} onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="" required />
                       <Form.Text className="text-muted">
                         We'll never share your email.
                       </Form.Text>
@@ -61,24 +78,24 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                 <Col>
                   <Row>
                     <Col>
-                      <Form.Label>Address</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>Address *</Form.Label>
+                      <Form.Control value={state.address} onChange={e => setState({ ...state, address: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Form.Label>City</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>City *</Form.Label>
+                      <Form.Control value={state.city} onChange={e => setState({ ...state, city: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Form.Label>State</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>State *</Form.Label>
+                      <Form.Control value={state.state} onChange={e => setState({ ...state, state: e.target.value })} type="text" placeholder="" required />
                     </Col>
                     <Col>
-                      <Form.Label>Zip</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>Zip *</Form.Label>
+                      <Form.Control value={state.zip} onChange={e => setState({ ...state, zip: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                 </Col>
@@ -86,35 +103,35 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
               <hr />
               {rewardPoints ? <>
                 <Row>
-                    <Col>
+                  <Col>
                     <span>Your reward points: {rewardPoints}</span>
-                    </Col>
-                    <Col>
+                  </Col>
+                  <Col>
                     <label>
-                      <input type="checkbox" checked={rewardschecked} onChange={() => setRewardschecked(!rewardschecked)} />
+                      <input type="checkbox" checked={state.rewardschecked} onChange={e => setState({ ...state, rewardschecked: e.target.value })} />
                       Redeem your Reward Points
                     </label>
-                    </Col>
-                    <Col></Col>
-                    <Col></Col>
-                  </Row>
+                  </Col>
+                  <Col></Col>
+                  <Col></Col>
+                </Row>
               </> : ""}
               <Row>
                 <Col>
                   <Row>
                     <Col>
-                      <Form.Label>Credit Card</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>Credit Card *</Form.Label>
+                      <Form.Control value={state.cardNumber} onChange={e => setState({ ...state, cardNumber: e.target.value })} type="text" placeholder="" required />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Form.Label>Expiry</Form.Label>
-                      <Form.Control type="text" placeholder="" required />
+                      <Form.Label>Expiry *</Form.Label>
+                      <Form.Control value={state.expiry} onChange={e => setState({ ...state, expiry: e.target.value })} type="text" placeholder="" required />
                     </Col>
                     <Col>
-                      <Form.Label>CVC</Form.Label>
-                      <Form.Control type="number" placeholder="" required />
+                      <Form.Label>CVC *</Form.Label>
+                      <Form.Control value={state.cvc} onChange={e => setState({ ...state, cvc: e.target.value })} type="number" placeholder="" required />
                     </Col>
                   </Row>
                 </Col>

@@ -15,14 +15,7 @@ function Booking() {
   const {hotelName} = state;
 
   //state for form data
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    age: "",
-    email: "",
-    subtotal: 123.45,
-    total: 234.56
-  })
+  const [formData, setFormData] = useState({})
 
   // function for going to next step by increasing step state by 1
   const nextStep = () => {

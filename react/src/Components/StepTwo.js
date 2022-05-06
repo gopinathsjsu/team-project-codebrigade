@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Card, Button, Image, Accordion, Container, Row, Col, Spinner } from "react-bootstrap";
 import validator from "validator";
 import { useSelector, useDispatch } from "react-redux";
+import updateBookingState from "../redux/bookingState/bookingStateAction";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
@@ -10,11 +11,11 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hotel, setHotel] = useState({});
   const [amenitiesHtml, setAmenitiesHtml] = useState("loading amenities...");
+  const [amenitiesState, setAmenitiesState] = useState({});
   const [daysHtml, setDaysHtml] = useState("loading days...");
   const dates = useSelector((state) => state.search.dates);
   const guests = useSelector((state) => state.search.guests);
-  console.log(dates);
-  console.log(guests);
+  const dispatch = useDispatch();
 
   var getDaysArray = function (start, end) {
     for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
@@ -26,12 +27,8 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
 
   const submitFormData = (e) => {
     e.preventDefault();
-
-    if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
-      setError("failed to validate form");
-    } else {
-      nextStep();
-    }
+    dispatch(updateBookingState({...values, ...amenitiesState}));
+    nextStep();
   };
 
   const restEndpoint = "http://localhost:8080/hotel";
@@ -46,10 +43,12 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
         (hotels) => {
           setIsLoaded(true);
           const hotel = hotels[0];// FIXME
-          console.log(hotel);
           setHotel(hotel);
           const amenitiesHtml = amenitiesToHtml(hotel.amenities);
           setAmenitiesHtml(amenitiesHtml);
+          let hotelAmenities = hotel.amenities;
+          hotelAmenities = hotelAmenities.map((amenity) => amenity.name);
+          hotelAmenities.forEach((name) => { amenitiesState[name] = false });
           const daysHtml = daysToHtml(hotel);
           setDaysHtml(daysHtml);
         },
@@ -71,6 +70,8 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
             <Col>
               <Form.Check
                 type="checkbox"
+                checked={amenitiesState[amenity.name]}
+                onChange={() => { amenitiesState[amenity.name] = !amenitiesState[amenity.name] }}
                 id={amenity.name}
                 label={amenity.desc} />
             </Col>
@@ -78,6 +79,8 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
               <Col>
                 <Form.Check
                   type="checkbox"
+                  checked={amenitiesState[amenities[i + 1].name]}
+                  onChange={() => { amenitiesState[amenities[i + 1].name] = !amenitiesState[amenities[i + 1].name] }}
                   id={amenities[i + 1].name}
                   label={amenities[i + 1].desc} />
               </Col>}
@@ -108,7 +111,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   return (
     <Card className="mt-3">
       <Form onSubmit={submitFormData}>
-        <Card.Header>Reservation Details</Card.Header>
+        <Card.Header>Reservation Details </Card.Header>
         <Card.Body>
           <Container>
             {!isLoaded && <Spinner animation="border" role="status">
@@ -208,7 +211,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
               </Button>
             </Col>
             <Col className="text-end">
-              <Button variant="primary" onClick={() => nextStep()}>Continue</Button>
+              <Button variant="primary" type="submit">Continue</Button>
             </Col>
           </Row>
         </Container>
