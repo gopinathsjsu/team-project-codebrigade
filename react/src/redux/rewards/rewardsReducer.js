@@ -2,7 +2,7 @@ import {FETCH_REWARDS_REQUEST, FETCH_REWARDS_SUCCESS, FETCH_REWARDS_FAILURE} fro
 
 const initialState = {
   isLoading: true,
-  data: [],
+  data: 0,
   error: ""
 };
 

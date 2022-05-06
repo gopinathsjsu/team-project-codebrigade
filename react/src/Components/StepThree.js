@@ -10,7 +10,6 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
   const dispatch = useDispatch();
   const [error, setError] = useState(false);
-  const [rewardPoints, setRewardPoints] = useState(10);
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -34,7 +33,10 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
       setError(true);
     } else {
-      const resultState = { ...bookingState, ...state }
+      const resultState = { ...bookingState, ...state };
+      if (state.rewardschecked) {
+        resultState.price = resultState.price - rewards;
+      }
       dispatch(updateBookingState(resultState));
       dispatch(postBooking(resultState));
       nextStep();
@@ -103,21 +105,19 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                 </Col>
               </Row>
               <hr />
-              {rewardPoints ? <>
-                <Row>
-                  <Col>
-                    <span>Your reward points: {rewards}</span>
-                  </Col>
-                  <Col>
-                    <label>
-                      <input type="checkbox" checked={state.rewardschecked} onChange={e => setState({ ...state, rewardschecked: e.target.value })} />
-                      Redeem your Reward Points
-                    </label>
-                  </Col>
-                  <Col></Col>
-                  <Col></Col>
-                </Row>
-              </> : ""}
+              <Row>
+                <Col>
+                  <span>Your reward points: {rewards}</span>
+                </Col>
+                <Col>
+                  <label>
+                    <input type="checkbox" checked={state.rewardschecked} onChange={e => setState({ ...state, rewardschecked: e.target.value })} />
+                    Redeem your Reward Points
+                  </label>
+                </Col>
+                <Col></Col>
+                <Col></Col>
+              </Row>
               <Row>
                 <Col>
                   <Row>
@@ -129,7 +129,14 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                   <Row>
                     <Col>
                       <Form.Label>Expiry *</Form.Label>
-                      <Form.Control value={state.expiry} onChange={e => setState({ ...state, expiry: e.target.value })} type="text" placeholder="" required />
+                      <Form.Control
+                        type="date"
+                        value={state.expiry}
+                        id="expiry"
+                        placeholder="mm/dd/yyyy"
+                        onChange={(e) => setState({ ...state, expiry: e.target.value })}
+                      />
+                      {/* <Form.Control value={state.expiry} onChange={e => setState({ ...state, expiry: e.target.value })} type="text" placeholder="" required /> */}
                     </Col>
                     <Col>
                       <Form.Label>CVC *</Form.Label>
