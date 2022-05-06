@@ -1,11 +1,11 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 
 const Final = ({ values }) => {
 
   //destructuring the object from values
   const { firstName, lastName, phoneNumber, creditCard, cvc } = values;
+  
   return (
     <>
       <Card className="mt-3">

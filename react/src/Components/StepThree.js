@@ -24,6 +24,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     cardNumber: "",
     cvc: ""
   });
+  const bookingState = useSelector((state) => state.bookingState.data);
 
   // after form submit validating the form data using validator
   const submitFormData = (e) => {
@@ -32,8 +33,8 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     if (false) {//validator.isEmpty(values.cvc) || validator.isEmpty(values.creditCard)) {
       setError(true);
     } else {
-      dispatch(updateBookingState({ ...values, ...state }));
-      dispatch(postBooking({ ...values, ...state }));
+      dispatch(updateBookingState({ ...bookingState, ...state }));
+      dispatch(postBooking({ ...bookingState, ...state }));
       nextStep();
     }
   };
