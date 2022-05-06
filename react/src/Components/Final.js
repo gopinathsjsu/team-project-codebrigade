@@ -1,11 +1,12 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const Final = ({ values }) => {
 
   //destructuring the object from values
   const { firstName, lastName, phoneNumber, creditCard, cvc } = values;
-  
+  const bookingState = useSelector((state) => state.bookingState.data);
   return (
     <>
       <Card className="mt-3">
@@ -13,7 +14,7 @@ const Final = ({ values }) => {
         <Card.Body>
           <Container>
             <Row>
-              <Col><Card.Title>Deluxe Queen, Guest room, 1 Queen, City view</Card.Title></Col>
+              <Col><Card.Title>{bookingState.hotelName}, {bookingState.roomType}</Card.Title></Col>
             </Row>
             <Row>
               <Col>
@@ -36,34 +37,48 @@ const Final = ({ values }) => {
               <Col>
                 <Row>
                   <Col>
-                    123 main st.
+                  {bookingState.firstName}
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    Pleasanton
+                  {bookingState.lastName}
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    CA
-                  </Col>
-                  <Col>
-                    94566
+                  {bookingState.email}
                   </Col>
                 </Row>
               </Col>
             </Row>
             <hr />
               <Row>
-                <Col>
-                  <Row>
-                    <Col>
-                      Credit Card: 4511 **** **** **** Exp: 4/5/22
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
+              <Col>
+                <Row>
+                  <Col>
+                  Credit Card : 
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                  Exp : 
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>
+                  {bookingState.creditCard}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                  {bookingState.expiry}
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </Container>
         </Card.Body>
       </Card>
