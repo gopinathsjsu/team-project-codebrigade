@@ -2,7 +2,10 @@ package edu.sjsu.codebrigade.hotelws.controller;
 
 import edu.sjsu.codebrigade.hotelws.persistence.Hotel;
 import edu.sjsu.codebrigade.hotelws.persistence.Room;
+import edu.sjsu.codebrigade.hotelws.pricing.HolidayPricingStrategy;
 import edu.sjsu.codebrigade.hotelws.pricing.PricingContext;
+import edu.sjsu.codebrigade.hotelws.pricing.WeekdayPricingStrategy;
+import edu.sjsu.codebrigade.hotelws.pricing.WeekendPricingStrategy;
 import edu.sjsu.codebrigade.hotelws.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +43,17 @@ public class HotelController {
             Set<Room> roomList = hotel.getRooms();
             for(Room room : roomList){
 
+                int roomPrice = room.getPrice();
+                PricingContext weekendPricingContext = new PricingContext(new WeekendPricingStrategy());
+                roomPrice = weekendPricingContext.executeDayBasedPricingStrategy(checkinDate, checkoutDate, roomPrice);
+
+                PricingContext weekdayPricingContext = new PricingContext(new WeekdayPricingStrategy());
+                roomPrice = weekdayPricingContext.executeDayBasedPricingStrategy(checkinDate, checkoutDate, roomPrice);
+
+                PricingContext holidayPricingContext = new PricingContext(new HolidayPricingStrategy());
+                roomPrice = holidayPricingContext.executeDayBasedPricingStrategy(checkinDate, checkoutDate, roomPrice);
+
+                room.setPrice(roomPrice);
             }
         }
 
@@ -54,9 +66,5 @@ public class HotelController {
         return ResponseEntity.ok().body(hotels);
     }
 
-    public static boolean isWeekend(final LocalDate ld)
-    {
-        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
-        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
-    }
+
 }
