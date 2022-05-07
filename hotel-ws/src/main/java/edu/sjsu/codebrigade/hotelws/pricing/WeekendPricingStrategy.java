@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class WeekendPricingStrategy extends PricingStrategy {
 
-    public int getPrice(int basePrice){
+    public int getPrice(LocalDate checkinDate, LocalDate checkoutDate, int basePrice){
         return basePrice + 30;
     }
 

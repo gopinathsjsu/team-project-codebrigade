@@ -1,7 +1,9 @@
 package edu.sjsu.codebrigade.hotelws.pricing;
 
+import java.time.LocalDate;
+
 public abstract class PricingStrategy {
-    public int getPrice(int basePrice){
+    public int getPrice(LocalDate checkinDate, LocalDate checkoutDate, int basePrice){
         return basePrice;
     }
 

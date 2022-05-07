@@ -1,6 +1,7 @@
 package edu.sjsu.codebrigade.hotelws.controller;
 
 import edu.sjsu.codebrigade.hotelws.persistence.Hotel;
+import edu.sjsu.codebrigade.hotelws.persistence.Room;
 import edu.sjsu.codebrigade.hotelws.pricing.PricingContext;
 import edu.sjsu.codebrigade.hotelws.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class HotelController {
@@ -33,6 +37,14 @@ public class HotelController {
                                                  @RequestParam(required = false) int numRooms,
                                                  @RequestParam(required = false) int numGuests) {
         List<Hotel> hotels = hotelService.getHotelsByCity(cityName);
+
+        for(Hotel hotel: hotels){
+            Set<Room> roomList = hotel.getRooms();
+            for(Room room : roomList){
+
+            }
+        }
+
         return ResponseEntity.ok().body(hotels);
     }
 
@@ -42,4 +54,9 @@ public class HotelController {
         return ResponseEntity.ok().body(hotels);
     }
 
+    public static boolean isWeekend(final LocalDate ld)
+    {
+        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
+        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
+    }
 }
