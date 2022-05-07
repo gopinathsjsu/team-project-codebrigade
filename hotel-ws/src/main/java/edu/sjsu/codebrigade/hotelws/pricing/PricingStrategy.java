@@ -7,7 +7,7 @@ public abstract class PricingStrategy {
         return basePrice;
     }
 
-    public int getPrice(int numberOfGuests, int numOfRooms, int basePrice){
+    public int getPrice(int numberOfGuests, int numOfRooms, int basePrice, String roomName){
         return basePrice;
     }
 }

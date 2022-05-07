@@ -25,8 +25,14 @@ public class DynamicPricingHandler {
                 PricingContext holidayPricingContext = new PricingContext(new HolidayPricingStrategy());
                 roomPrice = holidayPricingContext.executeDayBasedPricingStrategy(checkin, checkout, roomPrice);
 
-                PricingContext pricingContext = new PricingContext( new SeasonalPricingStrategy());
-                room.setPrice(pricingContext.executeSeasonBasedPricingStrategy( checkin, checkout, roomPrice));
+                PricingContext seasonalPricingContext = new PricingContext( new SeasonalPricingStrategy());
+                room.setPrice(seasonalPricingContext.executeSeasonBasedPricingStrategy( checkin, checkout, roomPrice));
+
+                PricingContext roomsPricingContext = new PricingContext(new RoomsPricingStrategy());
+                room.setPrice(roomsPricingContext.executeRoomAndGuestBasedPricingStrategy(numGuests, numRooms, roomPrice, room.getName()));
+
+                PricingContext guestsPricingContext = new PricingContext(new GuestsPricingStrategy());
+                room.setPrice(guestsPricingContext.executeRoomAndGuestBasedPricingStrategy(numGuests, numRooms, roomPrice, room.getName()));
 
                 room.setPrice(roomPrice);
             }

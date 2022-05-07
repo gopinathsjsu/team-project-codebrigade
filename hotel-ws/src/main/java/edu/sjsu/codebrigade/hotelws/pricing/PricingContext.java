@@ -17,8 +17,8 @@ public class PricingContext {
             return pricingStrategy.getPrice(checkinDate, checkoutDate, basePrice);
         }
 
-        public int executeRoomAndGuestBasedPricingStrategy(int numberOfGuests, int numOfRooms, int basePrice){
-            return pricingStrategy.getPrice(numberOfGuests, numOfRooms, basePrice);
+        public int executeRoomAndGuestBasedPricingStrategy(int numberOfGuests, int numOfRooms, int basePrice, String roomName){
+            return pricingStrategy.getPrice(numberOfGuests, numOfRooms, basePrice, roomName);
         }
 
 }
