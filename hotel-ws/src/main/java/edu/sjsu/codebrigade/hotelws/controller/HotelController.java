@@ -3,6 +3,7 @@ package edu.sjsu.codebrigade.hotelws.controller;
 import edu.sjsu.codebrigade.hotelws.persistence.Hotel;
 import edu.sjsu.codebrigade.hotelws.persistence.Room;
 import edu.sjsu.codebrigade.hotelws.pricing.PricingContext;
+import edu.sjsu.codebrigade.hotelws.pricing.SeasonalPricingStrategy;
 import edu.sjsu.codebrigade.hotelws.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,19 +33,19 @@ public class HotelController {
 
     @GetMapping("/hotel/{cityName}")
     public ResponseEntity<List<Hotel>> getHotels(@PathVariable String cityName,
-                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkinDate,
-                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkoutDate,
+                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
                                                  @RequestParam(required = false) int numRooms,
                                                  @RequestParam(required = false) int numGuests) {
         List<Hotel> hotels = hotelService.getHotelsByCity(cityName);
-
+        PricingContext pricingContext = new PricingContext( new SeasonalPricingStrategy());
         for(Hotel hotel: hotels){
+            hotel.setPrice(pricingContext.executeSeasonBasedPricingStrategy( checkin, checkout, hotel.getPrice()));
             Set<Room> roomList = hotel.getRooms();
             for(Room room : roomList){
-
+                room.setPrice(pricingContext.executeSeasonBasedPricingStrategy( checkin, checkout, room.getPrice()));
             }
         }
-
         return ResponseEntity.ok().body(hotels);
     }
 
