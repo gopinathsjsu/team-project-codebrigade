@@ -16,6 +16,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
   const dates = useSelector((state) => state.search.dates);
   const guests = useSelector((state) => state.search.guests);
   const dispatch = useDispatch();
+  const bookingState = useSelector((state) => state.bookingState.data);
 
   var getDaysArray = function (start, end) {
     for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
@@ -27,7 +28,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
 
   const submitFormData = (e) => {
     e.preventDefault();
-    dispatch(updateBookingState({...values, ...amenitiesState}));
+    dispatch(updateBookingState({...bookingState, ...amenitiesState, checkin: dates.checkin, checkout: dates.checkout}));
     nextStep();
   };
 

@@ -1,8 +1,33 @@
 import React, { useState } from "react";
 import { Form, Card, Container, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 // creating functional component ans getting props from app.js and destucturing them
 const Total = ({ values }) => {
+  const bookingState = useSelector((state) => state.bookingState.data);
+  const dates = useSelector((state) => state.search.dates);
+  const guests = useSelector((state) => state.search.guests);
+  var getDaysArray = function (start, end) {
+    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+      arr.push(new Date(dt).toISOString().substr(0, 10));
+    }
+    return arr;
+  };
+  const days = getDaysArray(new Date(dates.checkin), new Date(dates.checkout));
+
+  const daysToHtml = days.map(
+      (day, i) => (
+        <Row key={i}>
+          <Col>
+            {day}
+          </Col>
+          <Col>
+            ${bookingState.price}
+          </Col>
+        </Row>
+      )
+    );
+
   return (
     <div className="mt-3">
       <Card>
@@ -17,7 +42,7 @@ const Total = ({ values }) => {
             </Row>
             <Row>
               <Col>
-                <i>1 room for 1 night</i>
+                <i>{guests.numRooms} room(s) for {days.length} night</i>
               </Col>
               <Col>
                 Prices in USD
@@ -27,20 +52,13 @@ const Total = ({ values }) => {
               <Col>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                Saturday March 26, 2022
-              </Col>
-              <Col>
-                354.23
-              </Col>
-            </Row>
+            {daysToHtml}
             <Row>
               <Col>
                 Taxes and fees
               </Col>
               <Col>
-                78.90
+                ${bookingState.price * days.length * .1}
               </Col>
             </Row>
             <Row className="border-bottom pt-1">
@@ -52,10 +70,11 @@ const Total = ({ values }) => {
                 <b>Total</b>
               </Col>
               <Col>
-                <b>454.23</b>
+                <b>${(bookingState.price * days.length * 1.1).toFixed(2).replace(/\.0+$/,'')}</b>
               </Col>
             </Row>
-          </Container>        </Card.Body>
+          </Container>
+        </Card.Body>
       </Card>
     </div>
   );

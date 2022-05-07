@@ -1,5 +1,5 @@
 import axios from "axios";
-import {POST_CUSTOMER_REQUEST, POST_CUSTOMER_SUCCESS, POST_CUSTOMER_FAILURE} from "./regCustomerTypes";
+import { POST_CUSTOMER_REQUEST, POST_CUSTOMER_SUCCESS, POST_CUSTOMER_FAILURE } from "./regCustomerTypes";
 
 export const postCustomerRequest = () => {
   return {
@@ -22,16 +22,23 @@ export const postCustomerFailure = (error) => {
 };
 
 export const postCustomer = (email) => {
+  const config = {
+    method: "post",
+    url: "http://localhost:8080/customer",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: { email: email }
+  }
   return (dispatch) => {
-    dispatch(postCustomerRequest);
-    const url = "http://localhost:8080/customer";
+    dispatch(postCustomerRequest({ email: email }));
     //TODO: change this sample url with hotel url path while integration
-    axios.post(url)
-    .then( () => {
-      dispatch(postCustomerSuccess({email: email}));
-    })
-    .catch((error) => {
-      dispatch(postCustomerFailure(error.message));
-    });
+    axios(config)
+      .then(() => {
+        dispatch(postCustomerSuccess({ email: email }));
+      })
+      .catch((error) => {
+        dispatch(postCustomerFailure(error.message));
+      });
   }
 }

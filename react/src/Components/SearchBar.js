@@ -16,8 +16,10 @@ const SearchBar = () => {
     const [adultCount, setAdultCount] = useState(1);
     const [childCount, setChildCount] = useState(0);
     const [checkinDate, setCheckinDate] = useState(new Date().toISOString().substr(0, 10));
-    const [checkoutDate, setCheckoutDate] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
+    const checkinDateMin = new Date().toISOString().substr(0, 10);
+    const [checkoutDate, setCheckoutDate] = useState(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().substr(0, 10));
     const [checkoutDateMax, setCheckoutDateMax] = useState(new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().substr(0, 10));
+    const [checkoutDateMin, setCheckoutDateMin] = useState(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().substr(0, 10));
     const [inputLocation, setLocation] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,8 +37,10 @@ const SearchBar = () => {
     };
 
     const updateCheckoutMax = (checkin) => {
+        setCheckoutDateMin(new Date(new Date().setDate(new Date(checkin).getDate() + 2)).toISOString().substr(0, 10))
         setCheckoutDateMax(new Date(new Date().setDate(new Date(checkin).getDate() + 7)).toISOString().substr(0, 10))
         setCheckinDate(checkin);
+        setCheckoutDate(checkoutDateMin);
     }
 
     return <span className="contents">
@@ -57,6 +61,7 @@ const SearchBar = () => {
             <Form.Control
                 type="date"
                 id="checkIn"
+                min={checkinDateMin}
                 placeholder="mm/dd/yyyy"
                 defaultValue={getDate("today")}
                 onChange={(e) => updateCheckoutMax(e.target.value)}
@@ -67,6 +72,7 @@ const SearchBar = () => {
             <Form.Control
                 type="date"
                 max={checkoutDateMax}
+                min={checkoutDateMin}
                 id="CheckOut"
                 placeholder="mm/dd/yyyy"
                 value={checkoutDate}

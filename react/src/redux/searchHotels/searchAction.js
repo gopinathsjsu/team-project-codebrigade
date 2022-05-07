@@ -28,9 +28,14 @@ export const fetchHotels = (location, checkin, checkout, numRooms, numGuests) =>
     dispatch(fetchHotelsRequest);
     const url = "http://localhost:8080/hotel";
     //TODO: change this sample url with hotel url path while integration
-    axios.get(url + "/" + location)
+    axios.get(url + "/" + location , { params: { 
+      checkin: checkin, 
+      checkout: checkout, 
+      numRooms: numRooms, 
+      numGuests: numGuests 
+    } })
     .then( (response) => {
-      dispatch(fetchHotelsSuccess(response.data, {checkin: checkin, checkout: checkout}, {numRooms: numRooms, numGuests: numGuests}));
+      dispatch(fetchHotelsSuccess(response.data));
     })
     .catch((error) => {
       dispatch(fetchHotelsFailure(error.message));
