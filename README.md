@@ -18,6 +18,23 @@ Contributions:
 
 [Project Board](https://brigade.atlassian.net/jira/dashboards/10001)
 
-[Project Journal]()
+## Sprint burndown:
+![image](https://user-images.githubusercontent.com/4393945/167236900-fa8a2544-dc2b-459f-bdf9-208e12889228.png)
+
+## Sprint board screenshot:
+![image](https://user-images.githubusercontent.com/4393945/167236873-0adaf5f5-fbe3-4a3d-a0b7-de5723588422.png)
+
+## Cumulative flow diagram:
+![image](https://user-images.githubusercontent.com/4393945/167236942-479768dc-f1ae-49b8-8183-e7319d716e7b.png)
+
+## Sprint 1 Retrospective:
+![image](https://user-images.githubusercontent.com/4393945/167236992-8b3aefc4-250b-4e4c-8c1b-a94fccacb9a0.png)
+
+## Sprint 2 Retrospective:
+![image](https://user-images.githubusercontent.com/4393945/167237033-354eded8-4820-434e-a8ae-892f86f15e72.png)
+
+## Sprint 3 Retrospective:
+![image](https://user-images.githubusercontent.com/4393945/167237046-82d2c1e5-4e80-4674-ab47-9d2572b3632c.png)
+
 
 [Google Sprint Task Sheet]()
