@@ -36,5 +36,6 @@ Contributions:
 ## Sprint 3 Retrospective:
 ![image](https://user-images.githubusercontent.com/4393945/167237046-82d2c1e5-4e80-4674-ab47-9d2572b3632c.png)
 
+## User Access to Jira:
+![image](https://user-images.githubusercontent.com/4393945/167237139-3c21cef8-0234-45e7-bae1-10c2056c0d2c.png)
 
-[Google Sprint Task Sheet]()
