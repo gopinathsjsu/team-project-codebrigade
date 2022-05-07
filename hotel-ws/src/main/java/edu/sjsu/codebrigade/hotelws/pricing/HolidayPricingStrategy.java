@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class HolidayPricingStrategy extends PricingStrategy {
 
     @Override
-    public int getPrice(LocalDate checkinDate, LocalDate checkoutDate, int basePrice){
+    public int getPrice(int basePrice){
         return basePrice + 50;
     }
 
