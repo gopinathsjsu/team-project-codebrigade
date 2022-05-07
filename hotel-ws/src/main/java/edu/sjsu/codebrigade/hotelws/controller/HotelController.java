@@ -1,11 +1,7 @@
 package edu.sjsu.codebrigade.hotelws.controller;
 
+import edu.sjsu.codebrigade.hotelws.DynamicPricingHandler;
 import edu.sjsu.codebrigade.hotelws.persistence.Hotel;
-import edu.sjsu.codebrigade.hotelws.persistence.Room;
-import edu.sjsu.codebrigade.hotelws.pricing.HolidayPricingStrategy;
-import edu.sjsu.codebrigade.hotelws.pricing.PricingContext;
-import edu.sjsu.codebrigade.hotelws.pricing.WeekdayPricingStrategy;
-import edu.sjsu.codebrigade.hotelws.pricing.WeekendPricingStrategy;
 import edu.sjsu.codebrigade.hotelws.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 public class HotelController {
@@ -33,30 +28,13 @@ public class HotelController {
 
     @GetMapping("/hotel/{cityName}")
     public ResponseEntity<List<Hotel>> getHotels(@PathVariable String cityName,
-                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkinDate,
-                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkoutDate,
+                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
                                                  @RequestParam(required = false) int numRooms,
                                                  @RequestParam(required = false) int numGuests) {
         List<Hotel> hotels = hotelService.getHotelsByCity(cityName);
 
-        for(Hotel hotel: hotels){
-            Set<Room> roomList = hotel.getRooms();
-            for(Room room : roomList){
-
-                int roomPrice = room.getPrice();
-                PricingContext weekendPricingContext = new PricingContext(new WeekendPricingStrategy());
-                roomPrice = weekendPricingContext.executeDayBasedPricingStrategy(checkinDate, checkoutDate, roomPrice);
-
-                PricingContext weekdayPricingContext = new PricingContext(new WeekdayPricingStrategy());
-                roomPrice = weekdayPricingContext.executeDayBasedPricingStrategy(checkinDate, checkoutDate, roomPrice);
-
-                PricingContext holidayPricingContext = new PricingContext(new HolidayPricingStrategy());
-                roomPrice = holidayPricingContext.executeDayBasedPricingStrategy(checkinDate, checkoutDate, roomPrice);
-
-                room.setPrice(roomPrice);
-            }
-        }
-
+        new DynamicPricingHandler().updatePrices(hotels, checkin, checkout, numRooms, numGuests);
         return ResponseEntity.ok().body(hotels);
     }
 

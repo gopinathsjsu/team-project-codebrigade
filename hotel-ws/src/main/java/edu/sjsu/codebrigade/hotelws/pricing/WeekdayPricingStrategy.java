@@ -8,7 +8,10 @@ public class WeekdayPricingStrategy extends PricingStrategy {
 
     @Override
     public int getPrice(LocalDate checkinDate, LocalDate checkoutDate, int basePrice){
-        return basePrice - 20;
+        if(isWeekday(checkinDate) || isWeekday(checkoutDate)){
+            return basePrice - 20;
+        }
+        return basePrice;
     }
 
     public static boolean isWeekday(final LocalDate ld)
