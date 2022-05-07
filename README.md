@@ -16,7 +16,7 @@ Contributions:
 
 [GitHub Repo](https://github.com/gopinathsjsu/team-project-codebrigade/)
 
-[Project Board](https://brigade.atlassian.net/jira/dashboards/10001)
+[JIRA Project Board](https://brigade.atlassian.net/jira/your-work)
 
 ## Roadmap / Epics:
 ![image](https://user-images.githubusercontent.com/4393945/167237220-dc57bad3-e52b-4620-ae3b-7c890b146ba7.png)
