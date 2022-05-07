@@ -9,16 +9,16 @@ public class PricingContext {
             this.pricingStrategy = pricingStrategy;
         }
 
-        public int executeDayBasedPricingStrategy(LocalDate checkinDate, LocalDate checkoutDate){
-            return pricingStrategy.getPrice(checkinDate, checkoutDate);
+        public int executeDayBasedPricingStrategy(LocalDate checkinDate, LocalDate checkoutDate, int basePrice){
+            return pricingStrategy.getPrice(checkinDate, checkoutDate, basePrice);
         }
 
-        public int executeSeasonBasedPricingStrategy(LocalDate checkinDate, LocalDate checkoutDate){
-            return pricingStrategy.getPrice(checkinDate, checkoutDate);
+        public int executeSeasonBasedPricingStrategy(LocalDate checkinDate, LocalDate checkoutDate, int basePrice){
+            return pricingStrategy.getPrice(checkinDate, checkoutDate, basePrice);
         }
 
-        public int executeRoomAndGuestBasedPricingStrategy(int numberOfGuests, String roomType){
-            return pricingStrategy.getPrice(numberOfGuests, roomType);
+        public int executeRoomAndGuestBasedPricingStrategy(int numberOfGuests, int numOfRooms, int basePrice){
+            return pricingStrategy.getPrice(numberOfGuests, numOfRooms, basePrice);
         }
 
 }
