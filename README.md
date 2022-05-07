@@ -18,6 +18,9 @@ Contributions:
 
 [Project Board](https://brigade.atlassian.net/jira/dashboards/10001)
 
+## Roadmap / Epics:
+![image](https://user-images.githubusercontent.com/4393945/167237220-dc57bad3-e52b-4620-ae3b-7c890b146ba7.png)
+
 ## Sprint burndown:
 ![image](https://user-images.githubusercontent.com/4393945/167236900-fa8a2544-dc2b-459f-bdf9-208e12889228.png)
 
