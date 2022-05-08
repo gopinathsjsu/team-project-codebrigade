@@ -10,6 +10,24 @@ import java.util.Set;
 
 public class DynamicPricingHandler {
 
+    private DynamicPricingHandler() {
+        super();
+
+    }
+
+    private volatile static DynamicPricingHandler uniqueInstance;
+
+    public static DynamicPricingHandler getInstance() {
+        if (uniqueInstance == null) {
+            synchronized (DynamicPricingHandler.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new DynamicPricingHandler();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+
     public void updatePrices(List<Hotel> hotels, LocalDate checkin, LocalDate checkout, int numRooms, int numGuests){
         for(Hotel hotel: hotels){
             Set<Room> roomList = hotel.getRooms();

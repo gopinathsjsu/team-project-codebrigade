@@ -34,7 +34,7 @@ public class HotelController {
                                                  @RequestParam(required = false) int numGuests) {
         List<Hotel> hotels = hotelService.getHotelsByCity(cityName);
 
-        new DynamicPricingHandler().updatePrices(hotels, checkin, checkout, numRooms, numGuests);
+        DynamicPricingHandler.getInstance().updatePrices(hotels, checkin, checkout, numRooms, numGuests);
         return ResponseEntity.ok().body(hotels);
     }
 
