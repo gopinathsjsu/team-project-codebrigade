@@ -94,5 +94,23 @@ public class BookingController {
 
     }
 
+    @PutMapping("/booking")
+    public void updateBooking(@RequestParam(name = "email") String email,
+                              @RequestParam(name = "roomid") int roomId,
+                              @RequestParam(name = "checkin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                              @RequestParam(name = "checkout") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
+                              @RequestParam(name = "newcheckin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newCheckin,
+                              @RequestParam(name = "newcheckout") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newCheckout) {
+        try {
+            checkoutValidation.isOkay(checkin, checkout);
+        } catch (BookingValidationHandler.ValidationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+        List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(roomId, newCheckin);
+        if (!existing.isEmpty())
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "checking conflicts with "+ existing.size() +" existing booking(s)");
+        bookingService.updateBooking(email, roomId, checkin, checkout, newCheckin, newCheckout);
+
+    }
 
 }
