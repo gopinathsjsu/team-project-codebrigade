@@ -100,7 +100,8 @@ const MyTrips = () => {
                   :
                   <Col className="text-end">{row.checkin} to {row.checkout}</Col>}
 
-                {row.isEdit ? <Col className="text-end"><Button variant="primary" onClick={() => updateRow(trip, row, setRow)}>Update Details</Button></Col>
+                {row.isEdit ? <Col className="text-end"><row><Button className="update-button" variant="primary" onClick={() => updateRow(trip, row, setRow)}>Update Details</Button></row>
+                <row><Button variant="primary" onClick={() => setRow({...row, isEdit: false})}>Cancel</Button></row></Col>
                 : <Col className="text-end"><Button variant="primary" onClick={() => setRow({...row, isEdit: true})}>Edit Details</Button></Col>
                 }
                 <Col><Button onClick={handleShow}><FontAwesomeIcon icon={faTrashCan} /></Button></Col>
