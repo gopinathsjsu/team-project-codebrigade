@@ -124,7 +124,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
           </Container>
           <Container>
             <Row>
-              <Col><Image fluid={true} rounded={true} src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8" /></Col>
+              <Col><Image fluid={true} rounded={true} src={hotel.image} /></Col>
               <Col>
                 <Container>
                   <Row>
