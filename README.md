@@ -79,6 +79,8 @@ We have a clear communication among us and the bi-weekly scrum calls helped majo
 #### Simplicity: 
 We periodically ensure we are doing what is asked for and no more. We strive to keep the code base simpler and easier to be understood by everyone. We insert comments in places which need explanation. We refactor the code as and when needed to ensure the goal of simplicity is met and thereby debugging any issue that comes up should be simple.
 
+## Architecture Diagram
+![Architecture_Diagram](https://user-images.githubusercontent.com/54323888/167741686-613af316-f4f6-416e-963a-83a0c76f820f.png)
 
 ## Deployment Diagram
 ![image](https://user-images.githubusercontent.com/4393945/167546831-82a38259-2f8d-4a5d-be49-275fb20a53f8.png)
