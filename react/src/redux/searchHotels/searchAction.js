@@ -35,7 +35,7 @@ export const fetchHotels = (location, checkin, checkout, numRooms, numGuests) =>
       numGuests: numGuests 
     } })
     .then( (response) => {
-      dispatch(fetchHotelsSuccess(response.data));
+      dispatch(fetchHotelsSuccess(response.data, {checkin: checkin, checkout: checkout}, {numRooms: numRooms, numGuests: numGuests}));
     })
     .catch((error) => {
       dispatch(fetchHotelsFailure(error.message));

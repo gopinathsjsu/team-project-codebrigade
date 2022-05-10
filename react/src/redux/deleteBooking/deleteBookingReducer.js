@@ -1,4 +1,4 @@
-import {FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS_SUCCESS, FETCH_CUSTOMERS_FAILURE} from "./customerTypes";
+import {DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS, DELETE_BOOKING_FAILURE} from "./deleteBookingTypes";
 
 const initialState = {
   isLoading: true,
@@ -6,19 +6,19 @@ const initialState = {
   error: ""
 };
 
-const customerReducer = (state = initialState, action) => {
+const deleteBookingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_CUSTOMERS_REQUEST: return {
+    case DELETE_BOOKING_REQUEST: return {
       ...state,
       isLoading: true
     }
-    case FETCH_CUSTOMERS_SUCCESS: return {
+    case DELETE_BOOKING_SUCCESS: return {
       ...state,
       isLoading: false,
       data: action.payload,
       error: ""
     }
-    case FETCH_CUSTOMERS_FAILURE: return {
+    case DELETE_BOOKING_FAILURE: return {
       ...state,
       isLoading: false,
       data: [],
@@ -28,4 +28,4 @@ const customerReducer = (state = initialState, action) => {
   }
 };
 
-export default  customerReducer;
+export default deleteBookingReducer;
