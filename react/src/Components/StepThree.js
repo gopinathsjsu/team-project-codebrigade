@@ -11,7 +11,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
   const dispatch = useDispatch();
   const [error, setError] = useState(false);
-  const [rewardschecked, setRewardschecked] = useState(false);
+  const [rewardsChecked, setRewardschecked] = useState(false);
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -20,7 +20,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     city: "",
     state: "",
     zip: "",
-    rewardschecked: rewardschecked,
+    rewardsChecked: rewardsChecked,
     expiry: "",
     creditCard: "",
     cvc: ""
@@ -28,8 +28,8 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   const bookingState = useSelector((state) => state.bookingState.data);
   const rewards = useSelector((state) => state.rewards.data);
   const setRedeemRewards = () => {
-    setState({ ...state, rewardschecked: !rewardschecked});
-    setRewardschecked(!rewardschecked)
+    setState({ ...state, rewardsChecked: !rewardsChecked});
+    setRewardschecked(!rewardsChecked)
   };
   
   // after form submit validating the form data using validator
@@ -40,7 +40,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
       setError(true);
     } else {
       const resultState = { ...bookingState, ...state };
-      if (rewardschecked) {
+      if (rewardsChecked) {
         resultState.price = resultState.price - rewards;
       }
       dispatch(updateBookingState(resultState));
@@ -118,7 +118,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                 </Col>
                 <Col>
                   <label>
-                    <input type="checkbox" checked={rewardschecked} onChange={() => setRedeemRewards()} />
+                    <input type="checkbox" checked={rewardsChecked} onChange={() => setRedeemRewards()} />
                     Redeem your Reward Points
                   </label>
                 </Col>
