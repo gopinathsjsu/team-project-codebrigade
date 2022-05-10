@@ -8,6 +8,8 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from "react-redux";
 import { deleteBooking } from "./../redux/deleteBooking/deleteBookingAction";
+import Form from "react-bootstrap/Form";
+import { updateBooking } from "../redux/updateBooking/updateBookingAction";
 
 const MyTrips = () => {
 
@@ -28,6 +30,19 @@ const MyTrips = () => {
     }
     dispatch(deleteBooking(tripData));
     handleClose();
+  };
+
+  const updateRow = (trip, row, setRow) => {
+    const tripData = {
+      email: trip.email,
+      roomid: trip.roomId,
+      checkin: trip.checkin,
+      checkout: trip.checkout,
+      newcheckin: row.checkin,
+      newcheckout: row.checkout
+    }
+    dispatch(updateBooking(tripData));
+    setRow({ ...row, isEdit:false});
   };
 
   useEffect(() => {
@@ -56,9 +71,14 @@ const MyTrips = () => {
     return fetchedHotels;
   }
 
-  const tripRow = (trip, i) => {
+  const TripRow = ({trip}) => {
+    const [row, setRow] = useState({
+      checkin: trip.checkin,
+      checkout: trip.checkout,
+      isEdit: false
+    });
     return (
-      <div key={i}>
+      <div>
         <Card className="mt-3">
           <Card.Body className="ml-3">
             <Container fluid>
@@ -74,8 +94,15 @@ const MyTrips = () => {
                 <Col xs={5}>
                   <Card.Title>{hotels[trip.roomId] ? hotels[trip.roomId].name : "unknown hotel"}</Card.Title>
                 </Col>
-                <Col className="text-end">{trip.checkin} to {trip.checkout}</Col>
-              <Col className="text-end"><Button variant="primary" onClick={() => select(trip.id)}>View Details</Button></Col>
+                {row.isEdit ? <>
+                  <Col className="text-end"><Form.Control value={row.checkin} onChange={e => setRow({...row, checkin: e.target.value})} type="date" placeholder="" /> to <Form.Control value={row.checkout} onChange={e => setRow({...row, checkout: e.target.value})} type="date" placeholder="" /></Col>
+                </>
+                  :
+                  <Col className="text-end">{row.checkin} to {row.checkout}</Col>}
+
+                {row.isEdit ? <Col className="text-end"><Button variant="primary" onClick={() => updateRow(trip, row, setRow)}>Update Details</Button></Col>
+                : <Col className="text-end"><Button variant="primary" onClick={() => setRow({...row, isEdit: true})}>Edit Details</Button></Col>
+                }
                 <Col><Button onClick={handleShow}><FontAwesomeIcon icon={faTrashCan} /></Button></Col>
               </Row>
             </Container>
@@ -109,7 +136,7 @@ const MyTrips = () => {
     <h1 className="my-trips-title">My Trips</h1>
     <div className="trips-container">
       {
-        trips.map((trip, i) => tripRow(trip, i))
+        trips.map((trip, i) => <TripRow trip={trip} key={i}></TripRow>)
       }
     </div>
   </>
