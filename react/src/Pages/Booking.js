@@ -7,6 +7,7 @@ import Final from "../Components/Final";
 import Total from "../Components/Total";
 import Breadcrumbs from "../Components/Breadcrumbs";
 import { useLocation } from "react-router";
+import Header from "../Components/Header";
 
 function Booking() {
   //state for steps
@@ -46,6 +47,7 @@ function Booking() {
     case 1:
       return (
         <div className="App">
+          <Header />
           <Container>
             <Row>
               <Col>
@@ -59,6 +61,7 @@ function Booking() {
     case 2:
       return (
         <div className="App">
+          <Header />
           <Container>
             <Row>
               <Col>
@@ -71,6 +74,7 @@ function Booking() {
     case 3:
       return (
         <div className="App">
+          <Header />
           <Container>
             <Row>
               <Col>
@@ -84,6 +88,7 @@ function Booking() {
     case 4:
       return (
         <div className="App">
+          <Header />
           <Container>
             <Row>
               <Col>

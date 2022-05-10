@@ -11,12 +11,26 @@ Contributions:
 
 - Aishwarya Ravi:
 - Sarinder Virk:
-- Supreetha Ajay Mariyappal:
+- [Supreetha Ajay Mariyappal](mailto:supreethaajay.mariyappal@sjsu.edu)
+    - Design(Wireframes) and UI Implementation of:
+      - SignIn & SignUp screens
+      - Choice of Login for Users and admin
+      - Welcome screen with search bar
+      - Edit reservation feature in My trips page
+      - Delete/Cancel reservation feature in My trips page
+    - Integration of Booking api with all the necessary post state maintained in reducers
+    - Implemented redeeming of rewards feature in the payment workflow
+    - Implemented pricing Strategy to see the changes in prices dynamically based on peak seasons
+    - Performed the role of Scrum master in Sprint 2 (March 14th - 28th of 2022)
+  
 - Dharahasini Gangalapudi:
 
 [GitHub Repo](https://github.com/gopinathsjsu/team-project-codebrigade/)
 
 [JIRA Project Board](https://brigade.atlassian.net/jira/your-work)
+
+## Deployment Diagram
+![image](https://user-images.githubusercontent.com/4393945/167546831-82a38259-2f8d-4a5d-be49-275fb20a53f8.png)
 
 ## Roadmap / Epics:
 ![image](https://user-images.githubusercontent.com/4393945/167237220-dc57bad3-e52b-4620-ae3b-7c890b146ba7.png)

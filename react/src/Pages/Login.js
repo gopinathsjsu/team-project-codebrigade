@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPool from "../UserPool";
 import "../Styles/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import jwt_decode from "jwt-decode";
 
@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const onSubmit = (event) => {
     event.preventDefault();
     const user = new CognitoUser({
@@ -27,6 +27,7 @@ const Login = () => {
       onSuccess: (data) => {
         const idToken = data.getIdToken().getJwtToken();
         sessionStorage.setItem("userEmail",jwt_decode(idToken).email);
+        navigate("/");
       },
       onFailure: (err) => {
         setErrorMessage(err.message);
