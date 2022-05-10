@@ -45,6 +45,14 @@ Contributions:
     - Performed the role of Scrum master in Sprint 2 (March 14th - 28th of 2022)
   
 - Dharahasini Gangalapudi:
+- [Dharahasini Gangalapudi](mailto:dharahasini.gangalapudi@sjsu.edu)
+    - Developed Login and Signup using Amazon Cognito
+    - Done UI implemntation for Search List page
+    - Done UI implementation for rewards page
+    - Worked on integrating Rewards UI with backend
+    - Done UI implmentation for Customer List page and integrated that page with backend
+    - Worked on database Cleanup
+    - Performed the role of scrum master in Sprint 4 (April 14 - May 2nd of 2022)
 
 Tech Stack:
 Front End : React JS
