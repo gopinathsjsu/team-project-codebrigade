@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const SearchResults = () => {
 
   const hotels = useSelector((state) => state.search.data);
-    
+  
   const hotelRow = (hotel, i) => {
     return (
       <Card key={i} className="mt-3">

@@ -1,7 +1,8 @@
 import React from "react";
-import { Card, Button, Container, Row, Col, Figure } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import Header from "../Components/Header";
 import { useSelector } from "react-redux";
+import "./../Styles/MyTrips.css";
 
 
 const CustomerList=()=>{
@@ -12,12 +13,12 @@ const CustomerList=()=>{
         <Card.Body className="ml-3">
           <Container>
             <Row>
-                <Col className="text-end"><b>{customer.id}</b></Col>
-            <Col>
-              <Card.Title>{customer.user_name}</Card.Title>
-            </Col>
-              <Col className="text-end"><b>From ${customer.email}</b></Col>
-              <Col className="text-end"><b>From ${customer.reward_points}</b></Col>
+              <Col className="text-end"><b>{customer.id}</b></Col> 
+              <Col xs={5}>
+              <Card.Title>{customer.user_name}</Card.Title> 
+              </Col>
+              <Col className="text-end"><b>{customer.email}</b></Col>
+              <Col className="text-end"><b>{customer.reward_points}</b></Col>
             </Row>
           </Container>
           <Card.Text>
@@ -29,6 +30,7 @@ const CustomerList=()=>{
  
   return <>
     <Header />
+    <h1 className="my-trips-title">Customer List</h1>
     <Container>
       <Row>
         <Col>
