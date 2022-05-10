@@ -34,6 +34,10 @@ public class CustomerController {
         customerService.updateRewardPoints(email);
     }
 
+    public void updaterewardsToZero(@RequestBody String email) {
+        customerService.updateRewardPointsToZero(email);
+    }
+
     @GetMapping("/customer")
     @ResponseBody
     public ResponseEntity<List<Customer>> get() {

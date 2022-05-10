@@ -22,6 +22,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query(value = "UPDATE customer c SET c.reward_points = c.reward_points+10  WHERE c.email = :emailId",nativeQuery = true)
     void updateRewardPoints(@Param("emailId")String emailId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE customer c SET c.reward_points = 0  WHERE c.email = :emailId",nativeQuery = true)
+    void updateRewardPointsToZero(@Param("emailId")String emailId);
+
     @Query(value = "SELECT * FROM customer",nativeQuery = true)
     List<Customer> getCustomerDetails();
 }

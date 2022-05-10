@@ -11,6 +11,11 @@ public class SeasonalPricingStrategy extends PricingStrategy {
         if((checkinDate.compareTo(seasonStart) >= 0) && ((checkoutDate.compareTo(seasonEnd) <= 0))) {
             return basePrice + 40;
         }
+        LocalDate winterSeasonStart = LocalDate.parse("2022-12-01");
+        LocalDate winterSeasonEnd = LocalDate.parse("2022-12-31");
+        if((checkinDate.compareTo(winterSeasonStart) >= 0) && ((checkoutDate.compareTo(winterSeasonEnd) <= 0))) {
+            return basePrice + 50;
+        }
         return basePrice;
     }
 

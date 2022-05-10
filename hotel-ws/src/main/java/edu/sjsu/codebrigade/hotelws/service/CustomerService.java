@@ -20,6 +20,10 @@ public class CustomerService {
         customerRepository.updateRewardPoints(emailId);
     }
 
+    public void updateRewardPointsToZero(String emailId) {
+        customerRepository.updateRewardPointsToZero(emailId);
+    }
+
     public List<Customer> getCustomerDetails(){
         return customerRepository.getCustomerDetails();
     }
