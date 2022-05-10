@@ -10,6 +10,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
   const dispatch = useDispatch();
   const [error, setError] = useState(false);
+  const [rewardschecked, setRewardschecked] = useState(false);
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -18,14 +19,18 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
     city: "",
     state: "",
     zip: "",
-    rewardschecked: false,
+    rewardschecked: rewardschecked,
     expiry: "",
     creditCard: "",
     cvc: ""
   });
   const bookingState = useSelector((state) => state.bookingState.data);
   const rewards = useSelector((state) => state.rewards.data);
-
+  const setRedeemRewards = () => {
+    setState({ ...state, rewardschecked: !rewardschecked});
+    setRewardschecked(!rewardschecked)
+  };
+  
   // after form submit validating the form data using validator
   const submitFormData = (e) => {
     e.preventDefault();
@@ -34,7 +39,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
       setError(true);
     } else {
       const resultState = { ...bookingState, ...state };
-      if (state.rewardschecked) {
+      if (rewardschecked) {
         resultState.price = resultState.price - rewards;
       }
       dispatch(updateBookingState(resultState));
@@ -111,7 +116,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
                 </Col>
                 <Col>
                   <label>
-                    <input type="checkbox" checked={state.rewardschecked} onChange={e => setState({ ...state, rewardschecked: e.target.value })} />
+                    <input type="checkbox" checked={rewardschecked} onChange={() => setRedeemRewards()} />
                     Redeem your Reward Points
                   </label>
                 </Col>
