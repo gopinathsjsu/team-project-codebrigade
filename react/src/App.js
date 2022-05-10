@@ -17,7 +17,7 @@ import SearchResults from "./Pages/SearchResults";
 import MyTrips from "./Pages/MyTrips";
 import Rewards from "./Pages/Rewards";
 import Authentication from  "./Pages/Authentication";
-
+import CustomerList from "./Pages/CustomerList";
 
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
             <Route exact path='/myRewards' element={<Rewards />} />
             <Route exact path='/' element={<Home />} />
             <Route exact path='/signInOrJoin' element={<Authentication />} />
+            <Route exact path='/customerList' element={<CustomerList />} />
           </Routes>
         </Router>
       </div>
