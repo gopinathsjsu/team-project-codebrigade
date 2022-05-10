@@ -21,12 +21,12 @@ export const fetchRewardsFailure = (error) => {
   }
 };
 
-export const fetchRewards = () => {
+export const fetchRewards = (email) => {
   return (dispatch) => {
     dispatch(fetchRewardsRequest);
-    const url = "http://localhost:8080/customer/rewards/{emailId}";
+    const url = "http://localhost:8080/customer/rewards/" + email;
     //TODO: change this sample url with hotel url path while integration
-    axios.get(url + "/" + emailId)
+    axios.get(url)
     .then( (response) => {
       dispatch(fetchRewardsSuccess(response.data));
     })

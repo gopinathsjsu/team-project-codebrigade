@@ -4,6 +4,7 @@ import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
 import updateBookingState from "../redux/bookingState/bookingStateAction";
 import { postBooking } from "../redux/booking/bookingAction";
+import { fetchRewards } from "../redux/rewards/rewardsAction";
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
@@ -44,6 +45,7 @@ const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
       }
       dispatch(updateBookingState(resultState));
       dispatch(postBooking(resultState));
+      dispatch(fetchRewards(resultState.email));
       nextStep();
     }
   };

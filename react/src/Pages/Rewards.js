@@ -1,8 +1,14 @@
 import "./../Styles/Rewards.css";
 import Header from "../Components/Header";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import { useEffect } from "react";
+import { fetchRewards } from "../redux/rewards/rewardsAction";
 
 const MyRewards= () =>{
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchRewards(sessionStorage.getItem("userEmail")));
+  }, [])
     const rewards = useSelector((state) => state.rewards.data);
     return<>
     <Header/>
