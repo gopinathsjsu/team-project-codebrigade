@@ -11,7 +11,6 @@ const Header = () => {
       {isUserLoggedIn ? <Link className="link" to="/myRewards">My Rewards</Link> : ""}
       {!isUserLoggedIn ? <Link className="link" to="/signInOrJoin">SignIn or Join</Link> : ""}
       {isUserLoggedIn ? <Link className="link" to="/myTrips">My Trips</Link> : ""}
-      <Link className="link" to="/customerList">Customer List</Link>
       <div></div>
     </header>
   </>
