@@ -1,4 +1,4 @@
-package edu.sjsu.codebrigade.hotelws;
+package edu.sjsu.codebrigade.hotelws.validation;
 
 import java.time.LocalDate;
 

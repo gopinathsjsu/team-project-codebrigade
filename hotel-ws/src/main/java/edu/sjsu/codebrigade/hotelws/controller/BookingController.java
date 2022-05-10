@@ -3,13 +3,9 @@ package edu.sjsu.codebrigade.hotelws.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import edu.sjsu.codebrigade.hotelws.BookingCheckoutValidationHandler;
-import edu.sjsu.codebrigade.hotelws.BookingLengthValidationHandler;
-import edu.sjsu.codebrigade.hotelws.BookingValidationHandler;
 import edu.sjsu.codebrigade.hotelws.persistence.Booking;
-import edu.sjsu.codebrigade.hotelws.persistence.Customer;
 import edu.sjsu.codebrigade.hotelws.service.BookingService;
-import edu.sjsu.codebrigade.hotelws.service.CustomerService;
+import edu.sjsu.codebrigade.hotelws.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -19,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +31,20 @@ public class BookingController {
     private CustomerController customerController;
 
     private BookingValidationHandler checkoutValidation;
+    private CardValidator visaCardValidator;
+    CardValidator masterCardValidator;
+    CardValidator discoverCardValidator;
+    CardValidator chainValidator;
+
 
     public BookingController() {
         this.checkoutValidation = new BookingCheckoutValidationHandler();
         this.checkoutValidation.setNext(new BookingLengthValidationHandler());
+        visaCardValidator = new VisaCardValidator(null);
+        masterCardValidator = new MasterCardValidator(visaCardValidator);
+        discoverCardValidator = new DiscoverCardValidator(masterCardValidator);
+        chainValidator = new AmexCardValidator(discoverCardValidator);
+
     }
 
     // ObjectMapper is threadsafe, use a global for performance reasons
@@ -72,6 +79,7 @@ public class BookingController {
     public ResponseEntity<Booking> create(@RequestBody Booking newBooking) {
         LocalDate checkin = newBooking.getCheckin();
         LocalDate checkout = newBooking.getCheckout();
+        BigDecimal paymentCardNumber = BigDecimal.valueOf(Long.valueOf(newBooking.getCreditCard().replaceAll(" ", "")));
         int roomId = bookingService.getRoomIdByRoomTypeAndHotelName(newBooking.getRoomType(), newBooking.getHotelName());
         newBooking.setRoomId(roomId);
         try {
@@ -79,12 +87,45 @@ public class BookingController {
         } catch (BookingValidationHandler.ValidationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+
         List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(newBooking.getRoomId(), checkin);
         if (!existing.isEmpty())
             throw new ResponseStatusException(HttpStatus.CONFLICT, "checking conflicts with "+ existing.size() +" existing booking(s)");
+        if(!chainValidator.isValidCard(paymentCardNumber)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid card number");
+        }
+
         Booking booking = bookingService.save(newBooking);
         customerController.update(newBooking.getEmail());
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/booking")
+    public void deleteBooking(@RequestParam(name = "email") String email,
+                              @RequestParam(name = "roomid") int roomId,
+                              @RequestParam(name = "checkin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                              @RequestParam(name = "checkout") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout) {
+        bookingService.deleteBooking(email, roomId, checkin, checkout);
+
+    }
+
+    @PutMapping("/booking")
+    public void updateBooking(@RequestParam(name = "email") String email,
+                              @RequestParam(name = "roomid") int roomId,
+                              @RequestParam(name = "checkin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                              @RequestParam(name = "checkout") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
+                              @RequestParam(name = "newcheckin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newCheckin,
+                              @RequestParam(name = "newcheckout") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newCheckout) {
+        try {
+            checkoutValidation.isOkay(checkin, checkout);
+        } catch (BookingValidationHandler.ValidationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+        List<Booking> existing = bookingService.getBookingsByRoomIdAndDate(roomId, newCheckin);
+        if (!existing.isEmpty())
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "checking conflicts with "+ existing.size() +" existing booking(s)");
+        bookingService.updateBooking(email, roomId, checkin, checkout, newCheckin, newCheckout);
+
     }
 
 }

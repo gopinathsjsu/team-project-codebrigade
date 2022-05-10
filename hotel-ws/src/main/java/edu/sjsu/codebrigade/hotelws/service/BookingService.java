@@ -35,6 +35,14 @@ public class BookingService {
         return bookingRepository.findAll(example);
     }
 
+    public void deleteBooking(String emailId, int roomId, LocalDate checkin, LocalDate checkout) {
+         bookingRepository.deleteBooking(emailId, roomId, checkin, checkout);
+    }
+
+    public void updateBooking(String emailId, int roomId, LocalDate checkin, LocalDate checkout, LocalDate newCheckin, LocalDate newCheckout) {
+        bookingRepository.updateBooking(emailId, roomId, checkin, checkout, newCheckin, newCheckout);
+    }
+
     public Booking save(Booking newBooking) {
         return bookingRepository.saveAndFlush(newBooking);
     }
