@@ -7,9 +7,7 @@ import edu.sjsu.codebrigade.hotelws.BookingCheckoutValidationHandler;
 import edu.sjsu.codebrigade.hotelws.BookingLengthValidationHandler;
 import edu.sjsu.codebrigade.hotelws.BookingValidationHandler;
 import edu.sjsu.codebrigade.hotelws.persistence.Booking;
-import edu.sjsu.codebrigade.hotelws.persistence.Customer;
 import edu.sjsu.codebrigade.hotelws.service.BookingService;
-import edu.sjsu.codebrigade.hotelws.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -86,5 +84,15 @@ public class BookingController {
         customerController.update(newBooking.getEmail());
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/booking")
+    public void deleteBooking(@RequestParam(name = "email") String email,
+                              @RequestParam(name = "roomid") int roomId,
+                              @RequestParam(name = "checkin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
+                              @RequestParam(name = "checkout") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout) {
+        bookingService.deleteBooking(email, roomId, checkin, checkout);
+
+    }
+
 
 }
