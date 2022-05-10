@@ -65,7 +65,7 @@ public class Booking {
     private String zip;
 
     @Transient
-    private boolean rewardsChecked = false;
+    private boolean rewardschecked = false;
 
     public boolean isCrib() {
         return getOptionBit(1);
@@ -311,11 +311,11 @@ public class Booking {
     }
 
     public boolean isRewardsChecked() {
-        return rewardsChecked;
+        return rewardschecked;
     }
 
-    public void setRewardsChecked(boolean rewardsChecked) {
-        this.rewardsChecked = rewardsChecked;
+    public void setRewardsChecked(boolean rewardschecked) {
+        this.rewardschecked = rewardschecked;
     }
 
     public String getZip() {
