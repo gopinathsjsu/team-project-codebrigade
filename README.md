@@ -18,6 +18,9 @@ Contributions:
 
 [JIRA Project Board](https://brigade.atlassian.net/jira/your-work)
 
+## Deployment Diagram
+![image](https://user-images.githubusercontent.com/4393945/167546831-82a38259-2f8d-4a5d-be49-275fb20a53f8.png)
+
 ## Roadmap / Epics:
 ![image](https://user-images.githubusercontent.com/4393945/167237220-dc57bad3-e52b-4620-ae3b-7c890b146ba7.png)
 
