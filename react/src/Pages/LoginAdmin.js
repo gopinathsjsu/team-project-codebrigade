@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPoolAdmin from "../UserPoolAdmin";
 import "../Styles/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
-
+import { useDispatch } from "react-redux";
+import { fetchCustomers } from "../redux/customer/customerAction";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmit = (event) => {
     event.preventDefault();
-
+     dispatch(fetchCustomers());
     const user = new CognitoUser({
       Username: email,
       Pool: UserPoolAdmin,
@@ -33,12 +35,13 @@ const Login = () => {
         console.log("newPasswordRequired: ", data);
       },
     });
+    navigate("/customerList")
   };
 
   return<>
   <Header/>
     <div className="Contents">
-      <header className="title">Sign in to your account</header>
+      <header className="title">Sign in to your Admin account</header>
       <div className="fields-container">
         <form onSubmit={onSubmit}>
           <div className="field-container">

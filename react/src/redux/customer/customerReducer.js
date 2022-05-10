@@ -2,7 +2,7 @@ import {FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS_SUCCESS, FETCH_CUSTOMERS_FAILUR
 
 const initialState = {
   isLoading: true,
-  data: 0,
+  data: [],
   error: ""
 };
 

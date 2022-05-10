@@ -1,24 +1,31 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import Header from "../Components/Header";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./../Styles/MyTrips.css";
+import { fetchCustomers } from "../redux/customer/customerAction";
+import { useEffect } from "react";
 
 
 const CustomerList=()=>{
+
+   
+
     const customers = useSelector((state) => state.customers.data);
+    console.log("cust:c",customers)
     const customerRow = (customer, i) => {
     return (
       <Card key={i} className="mt-3">
         <Card.Body className="ml-3">
           <Container>
             <Row>
-              <Col className="text-end"><b>{customer.id}</b></Col> 
-              <Col xs={5}>
-              <Card.Title>{customer.user_name}</Card.Title> 
+              
+              <Col className="text-start"><b>{customer.id}</b></Col> 
+              <Col>
+              <Card.Title>{customer.userName}</Card.Title> 
               </Col>
               <Col className="text-end"><b>{customer.email}</b></Col>
-              <Col className="text-end"><b>{customer.reward_points}</b></Col>
+              <Col className="text-end"><b>Reward Points:{customer.rewardPoints}</b></Col>
             </Row>
           </Container>
           <Card.Text>

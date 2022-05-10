@@ -12,6 +12,7 @@ import Hotels from "./Pages/Hotels";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
+import LoginAdmin from "./Pages/LoginAdmin"
 import SignupAdmin from "./Pages/SignupAdmin";
 import SearchResults from "./Pages/SearchResults";
 import MyTrips from "./Pages/MyTrips";
@@ -32,7 +33,7 @@ function App() {
             <Route exact path='/hotels' element={<Hotels />} />
             <Route exact path='/signUpAdmin' element={<SignupAdmin />} />
             <Route exact path='/login' element={<Login />} />
-            <Route exact path='/loginAdmin' element={<Login />} />
+            <Route exact path='/loginAdmin' element={<LoginAdmin />} />
             <Route exact path='/searchResults' element={<SearchResults/>} />
             <Route exact path='/myTrips' element={<MyTrips />} />
             <Route exact path='/myRewards' element={<Rewards />} />
