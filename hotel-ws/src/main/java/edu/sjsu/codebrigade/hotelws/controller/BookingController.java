@@ -95,6 +95,10 @@ public class BookingController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid card number");
         }
 
+        if(newBooking.isRewardsChecked()){
+            customerController.updaterewardsToZero(newBooking.getEmail());
+        }
+
         Booking booking = bookingService.save(newBooking);
         customerController.update(newBooking.getEmail());
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
