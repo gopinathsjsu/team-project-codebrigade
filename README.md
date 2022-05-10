@@ -44,8 +44,7 @@ Contributions:
     - Implemented pricing Strategy to see the changes in prices dynamically based on peak seasons
     - Performed the role of Scrum master in Sprint 2 (March 14th - 28th of 2022)
   
-- Dharahasini Gangalapudi:
-- [Dharahasini Gangalapudi](mailto:dharahasini.gangalapudi@sjsu.edu)
+- Dharahasini Gangalapudi:(mailto:dharahasini.gangalapudi@sjsu.edu)
     - Developed Login and Signup using Amazon Cognito
     - Done UI implemntation for Search List page
     - Done UI implementation for rewards page
