@@ -1,5 +1,6 @@
 import axios from "axios";
 import {UPDATE_BOOKING_REQUEST, UPDATE_BOOKING_SUCCESS, UPDATE_BOOKING_FAILURE} from "./updateBookingTypes";
+import { RestUrl } from '../../global'
 
 export const updateBookingRequest = () => {
   return {
@@ -24,7 +25,7 @@ export const updateBookingFailure = (error) => {
 export const updateBooking = (bookingState) => {
   return (dispatch) => {
     dispatch(updateBookingRequest);
-    let url = "http://localhost:8080/booking?";
+    let url = RestUrl + "/booking?";
     Object.keys(bookingState).forEach((key) => url+= key + "=" + bookingState[key] + "&");
     url = url.substring(0, url.length-1);
     axios.put(url , { 

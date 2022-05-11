@@ -1,5 +1,6 @@
 import axios from "axios";
 import {DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS, DELETE_BOOKING_FAILURE} from "./deleteBookingTypes";
+import { RestUrl } from '../../global'
 
 export const deleteBookingRequest = () => {
   return {
@@ -24,8 +25,9 @@ export const deleteBookingFailure = (error) => {
 export const deleteBooking = (bookingState) => {
   return (dispatch) => {
     dispatch(deleteBookingRequest);
+    const url = RestUrl + "/booking";
     //TODO: change this sample url with hotel url path while integration
-    axios.delete("http://localhost:8080/booking" , { params: { 
+    axios.delete(url, { params: { 
       email: bookingState.email,
       roomid: bookingState.roomid,
       checkin: bookingState.checkin, 
