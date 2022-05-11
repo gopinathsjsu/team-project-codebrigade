@@ -1,5 +1,6 @@
 import axios from "axios";
 import {POST_BOOKING_REQUEST, POST_BOOKING_SUCCESS, POST_BOOKING_FAILURE} from "./bookingTypes";
+import { RestUrl } from '../../global'
 
 export const postBookingRequest = () => {
   return {
@@ -21,10 +22,11 @@ export const postBookingFailure = (error) => {
   }
 };
 
+const url = RestUrl + "/booking";
 export const postBooking = (bookingState) => {
   const config = {
     method: "post",
-    url: "http://localhost:8080/booking",
+    url: url,
     headers: {
       "Content-Type": "application/json",
     },

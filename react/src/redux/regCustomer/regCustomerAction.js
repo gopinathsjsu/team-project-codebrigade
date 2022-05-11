@@ -1,5 +1,6 @@
 import axios from "axios";
-import { POST_CUSTOMER_REQUEST, POST_CUSTOMER_SUCCESS, POST_CUSTOMER_FAILURE } from "./regCustomerTypes";
+import {POST_CUSTOMER_REQUEST, POST_CUSTOMER_SUCCESS, POST_CUSTOMER_FAILURE} from "./regCustomerTypes";
+import { RestUrl } from '../../global'
 
 export const postCustomerRequest = () => {
   return {
@@ -21,10 +22,11 @@ export const postCustomerFailure = (error) => {
   }
 };
 
+const url = RestUrl + "/customer";
 export const postCustomer = (email) => {
   const config = {
     method: "post",
-    url: "http://localhost:8080/customer",
+    url: url,
     headers: {
       "Content-Type": "application/json",
     },

@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS_SUCCESS, FETCH_CUSTOMERS_FAILURE} from "./customerTypes";
+import { RestUrl } from '../../global'
 
 export const fetchCustomersRequest = () => {
   return {
@@ -21,10 +22,10 @@ export const fetchCustomersFailure = (error) => {
   }
 };
 
-export const fetchCustomers = () => {
+const url = RestUrl + "/customer";
+export const fetchCustomers = (id,email,user_name,reward_points) => {
   return (dispatch) => {
     dispatch(fetchCustomersRequest);
-    const url = "http://localhost:8080/customer";
     //TODO: change this sample url with hotel url path while integration
     axios.get(url)
     .then( (response) => {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FETCH_HOTELS_REQUEST, FETCH_HOTELS_SUCCESS, FETCH_HOTELS_FAILURE} from "./searchTypes";
+import { RestUrl } from '../../global'
 
 export const fetchHotelsRequest = () => {
   return {
@@ -26,7 +27,7 @@ export const fetchHotelsFailure = (error) => {
 export const fetchHotels = (location, checkin, checkout, numRooms, numGuests) => {
   return (dispatch) => {
     dispatch(fetchHotelsRequest);
-    const url = "http://localhost:8080/hotel";
+    const url = RestUrl + "/hotel";
     //TODO: change this sample url with hotel url path while integration
     axios.get(url + "/" + location , { params: { 
       checkin: checkin, 

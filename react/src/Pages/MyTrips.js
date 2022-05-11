@@ -10,12 +10,13 @@ import { useDispatch } from "react-redux";
 import { deleteBooking } from "./../redux/deleteBooking/deleteBookingAction";
 import Form from "react-bootstrap/Form";
 import { updateBooking } from "../redux/updateBooking/updateBookingAction";
+import { RestUrl } from '../global'
 
 const MyTrips = () => {
 
   let navigate = useNavigate();
   const dispatch = useDispatch();
-  const server = 'http://localhost:8080';
+  const server = RestUrl;
   const [trips, setTrips] = useState([]);
   const [hotels, setHotels] = useState({});
   const [show, setShow] = useState(false);

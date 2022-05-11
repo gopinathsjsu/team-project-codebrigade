@@ -3,6 +3,7 @@ import { Form, Card, Button, Image, Accordion, Container, Row, Col, Spinner } fr
 import validator from "validator";
 import { useSelector, useDispatch } from "react-redux";
 import updateBookingState from "../redux/bookingState/bookingStateAction";
+import { RestUrl } from '../global'
 
 // creating functional component ans getting props from app.js and destucturing them
 const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
@@ -32,13 +33,13 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
     nextStep();
   };
 
-  const restEndpoint = "http://localhost:8080/hotel";
+  const restEndpoint = RestUrl + "/hotel";
 
   // Note: the empty deps array [] means
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
-    fetch("http://localhost:8080/hotel") // fetch a specific hotel room
+    fetch(restEndpoint) // fetch a specific hotel room
       .then(res => res.json())
       .then(
         (hotels) => {
@@ -181,7 +182,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
                           Taxes and fees
                         </Col>
                         <Col>
-                          ${hotel.price * days.length * .1}
+                         ${(hotel.price * days.length * 1.1).toFixed(2).replace(/\.0+$/,'')}
                         </Col>
                       </Row>
                       <Row className="border-bottom pt-1">
@@ -193,7 +194,7 @@ const StepTwo = ({ nextStep, handleFormData, prevStep, values }) => {
                           <b>Total</b>
                         </Col>
                         <Col>
-                          <b>${hotel.price * days.length * 1.1}</b>
+                          <b>${(hotel.price * days.length * 1.1).toFixed(2).replace(/\.0+$/,'')}</b>
                         </Col>
                       </Row>
                     </Container>
