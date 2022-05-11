@@ -92,6 +92,19 @@ We follow  bi-weekly meetings on Mondays and Thursdays, each sprint starting fro
 
 [JIRA Project Board](https://brigade.atlassian.net/jira/your-work)
 
+## Feature Set:
+Sign up and Sign in (Separate flow for Hotel Employees and customers)
+Enrolling a new customer
+Search Hotels
+Manage Rewards account
+Hotel rooms Booking & all validations
+Amenities selection while booking
+Redeem rewards
+View all bookings (My trips page for customers)
+Edit & Cancel reservations/bookings
+Dynamic Pricing (based on weekdays, weekends, holidays, customer loyalty, summer & christmas seasons and no. of rooms, guests, and room types)
+Admin workflow - List of customers registered and their details
+
 ## XP Core Values
 #### Communication:
 We have a clear communication among us and the bi-weekly scrum calls helped majorly and if any person was not able to attend the same, they provided offline status update through Whatsapp. We worked together to ensure each one of us is aware of where the project stands and what is their responsibility as a team member.
