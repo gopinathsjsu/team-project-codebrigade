@@ -66,12 +66,12 @@ Contributions:
     - Worked on database Cleanup
     - Performed the role of scrum master in Sprint 4 (April 14 - May 2nd of 2022)
 
-Tech Stack:
-Front End : React JS
-Back End : Java
-Database: AWS RDS (MYSQL)
-Cloud Services: AWS (Cognito, CloudFront, S3, EC2, ELB, CodePipeline)
-UX: Framer
+## Tech Stack:
+ - Front End : React JS
+ - Back End : Java
+ - Database: AWS RDS (MYSQL)
+ - Cloud Services: AWS (Cognito, CloudFront, S3, EC2, ELB, CodePipeline)
+ - UX: Framer
 
 [GitHub Repo](https://github.com/gopinathsjsu/team-project-codebrigade/)
 
@@ -93,17 +93,18 @@ We follow  bi-weekly meetings on Mondays and Thursdays, each sprint starting fro
 [JIRA Project Board](https://brigade.atlassian.net/jira/your-work)
 
 ## Feature Set:
-Sign up and Sign in (Separate flow for Hotel Employees and customers)
-Enrolling a new customer
-Search Hotels
-Manage Rewards account
-Hotel rooms Booking & all validations
-Amenities selection while booking
-Redeem rewards
-View all bookings (My trips page for customers)
-Edit & Cancel reservations/bookings
-Dynamic Pricing (based on weekdays, weekends, holidays, customer loyalty, summer & christmas seasons and no. of rooms, guests, and room types)
-Admin workflow - List of customers registered and their details
+- Sign up and Sign in (Separate flow for Hotel Employees and customers)
+- Enrolling a new customer
+- Choice of Login for Users and admin
+- Welcome screen with search bar to Search Hotels
+- Manage Rewards account - MyRewards screen
+- Hotel rooms Booking & all validations - Booking flow
+- Amenities selection while booking
+- Redeem rewards
+- View all bookings (My trips page for customers)
+- Edit & Cancel reservations/bookings
+- Dynamic Pricing (based on weekdays, weekends, holidays, customer loyalty, summer & christmas seasons and no. of rooms, guests, and room types)
+- Admin workflow - List of customers registered and their details
 
 ## XP Core Values
 #### Communication:
