@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Card, Button, Container, Row, Col } from "react-bootstrap";
 import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import updateBookingState from "../redux/bookingState/bookingStateAction";
 import { postBooking } from "../redux/booking/bookingAction";
 import { fetchRewards } from "../redux/rewards/rewardsAction";
@@ -10,6 +11,11 @@ import { fetchRewards } from "../redux/rewards/rewardsAction";
 const StepThree = ({ nextStep, handleFormData, prevStep, values }) => {
   //creating error state for validation
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchRewards(sessionStorage.getItem("userEmail")));
+  }, [])
+
   const [error, setError] = useState(false);
   const [rewardsChecked, setRewardschecked] = useState(false);
   const [state, setState] = useState({
