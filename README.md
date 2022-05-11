@@ -62,6 +62,12 @@ UX: Framer
 
 [GitHub Repo](https://github.com/gopinathsjsu/team-project-codebrigade/)
 
+## Design Decisions
+- MVC pattern (Spring boot) for backend
+- Strategy pattern for Dynamic pricing
+- Chain of Responsibility pattern for booking and payment (Credit Card) validations
+- Singleton pattern for retrieving Validation handler
+
 ## Project Folder Description
 - wireframes - contains the wireframes of the UI screens planned.
 - react - contains the frontend apps codebase in react.
