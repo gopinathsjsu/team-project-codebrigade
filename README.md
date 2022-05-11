@@ -32,6 +32,19 @@ Contributions:
     - Performed the role of Scrum master in Sprint 3 (March 28th - April 11th of 2022)
     
 - Sarinder Virk:
+    - initial AWS infrastructure setup
+    - intial React app setup
+    - initial Atlassian setup
+    - scrum master role in Spring 1
+    - Booking wizard setup (Step 1, 2, 3)
+    - Step 2 accordian UI
+    - integrate 'amenities' portion of the UI
+    - add 'amenities' to 'hotels' api
+    - integrate 'checkin/checkout dates' portion of the UI
+    - Integrate reservation details page
+    - unit tests
+
+
 - [Supreetha Ajay Mariyappal](mailto:supreethaajay.mariyappal@sjsu.edu)
     - Design(Wireframes) and UI Implementation of:
       - SignIn & SignUp screens
