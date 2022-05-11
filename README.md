@@ -77,6 +77,7 @@ UX: Framer
 
 ## Design Decisions
 - MVC pattern (Spring boot) for backend
+- Front end uses 'react-redux' which updates the screen upon changes - as per Observer pattern
 - Strategy pattern for Dynamic pricing
 - Chain of Responsibility pattern for booking and payment (Credit Card) validations
 - Singleton pattern for retrieving Validation handler
